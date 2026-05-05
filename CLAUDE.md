@@ -4,6 +4,18 @@ Save this as `CLAUDE.md` in the root of this repo. It loads on every Claude Code
 
 This session has one job: research a company, then build a complete, distinctive one-page website for them. No multi-page routing, no half-finished placeholder content, no AI-generated images.
 
+## Speed &amp; efficiency
+
+**Build fast. Use as few tokens as possible. Never sacrifice quality.**
+
+- Parallelise everything that can be parallelised: fire image downloads, web searches and fetches simultaneously — never sequentially when they're independent.
+- Narrate only at decision points. No running commentary, no "now I will…" updates between every tool call. Silence is fine while working.
+- Write HTML, CSS and JS in one pass. No drafting, no revisiting whole files to tweak small things — get it right the first time.
+- Skip tools that won't yield new data. If two searches return the same result, stop searching and proceed with what you have.
+- Don't recheck files you just wrote. Trust the write, move forward.
+- Self-review mentally, not in text. Run the Phase 5 checklist in your head before the commit — don't produce a written summary of each check.
+- Hand-off reply is the only post-build output: the seven bullet points, nothing else.
+
 ---
 
 ## Trigger
