@@ -4,17 +4,46 @@ Save this as `CLAUDE.md` in the root of this repo. It loads on every Claude Code
 
 This session has one job: research a company, then build a complete, distinctive one-page website for them. No multi-page routing, no half-finished placeholder content, no AI-generated images.
 
-## Speed &amp; efficiency
+## Speed &amp; efficiency — read this first
 
-**Build fast. Use as few tokens as possible. Never sacrifice quality.**
+**Target: site committed and pushed in under 5 minutes. Use as few tokens as possible. Quality stays high.**
 
-- Parallelise everything that can be parallelised: fire image downloads, web searches and fetches simultaneously — never sequentially when they're independent.
-- Narrate only at decision points. No running commentary, no "now I will…" updates between every tool call. Silence is fine while working.
-- Write HTML, CSS and JS in one pass. No drafting, no revisiting whole files to tweak small things — get it right the first time.
-- Skip tools that won't yield new data. If two searches return the same result, stop searching and proceed with what you have.
-- Don't recheck files you just wrote. Trust the write, move forward.
-- Self-review mentally, not in text. Run the Phase 5 checklist in your head before the commit — don't produce a written summary of each check.
-- Hand-off reply is the only post-build output: the seven bullet points, nothing else.
+### Hard rules
+
+- **Cap research at 2 web searches.** If the first two searches don't surface their own website / Facebook / Instagram, stop searching. The business is small or unindexed — proceed with what the user gave you. Don't run the same search with five variants.
+- **One image-source query, then download.** Run a single Unsplash search returning a list of photo URLs, then `curl` 5–7 images **in one parallel `&amp;`/`wait` block.** Do not download images one at a time. Do not run an Unsplash query per service.
+- **Don't verify images by Reading them back.** Trust Unsplash. If a photo turns out wrong, swap it on the next build, not this one.
+- **Don't run `identify` / `ls` / `git status` / `pwd` to "check progress."** Those are token-burning no-ops. Run them only when their output changes a decision.
+- **Don't recheck or re-Read your own writes.** Edit/Write would have errored if it failed.
+- **Write the three files (`index.html`, `styles.css`, `script.js`) in one pass each.** No drafting. No revisit-to-tweak. Get it right the first time. Editing your own freshly-written file is a smell.
+- **No mental-review essays.** Run Phase 5 silently. No paragraphs explaining what you checked.
+- **Skip placeholder generation if the layout doesn't need that image slot.** A text-only service row beats a watermarked photo when no real photo exists.
+- **Icons:** generate the manifest icons in **one** Pillow script, not one tool call per size.
+- **TodoWrite is optional.** For a build that should take &lt; 5 min, the todo list itself costs more than it saves. Skip it unless the build is genuinely complex.
+- **Final reply is the seven hand-off bullets only.** Nothing else. No walkthrough, no recap.
+
+### What good looks like (rough budget)
+
+| Step | Tool calls (max) |
+|---|---|
+| Research (find them, extract voice/contact) | 1–2 web searches, 0–1 web fetch |
+| Image sourcing | 1 Unsplash search + 1 parallel curl block |
+| Icons + manifest | 1 Pillow script + 1 Write |
+| Site code | 3 Writes (HTML, CSS, JS) |
+| Brief + SOURCES | 2 Writes |
+| Commit + push | 1 Bash |
+| **Total** | **~10–12 tool calls** |
+
+If you're over 20 tool calls before the commit, you're meandering — stop and finish.
+
+### Parallelise aggressively
+
+Send these as a single message with multiple tool calls when they're independent:
+
+- Initial searches (name + name+location at once)
+- Image downloads (5–7 `curl` commands inside one Bash with `&amp;` and `wait`)
+- The three site files (`index.html`, `styles.css`, `script.js` — three Write calls in one message)
+- `brief.md` and `SOURCES.md` (two Writes in one message)
 
 ---
 
