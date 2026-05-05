@@ -102,6 +102,32 @@ If, after exhausting all four sources above, you still can't get a real image fo
 
 Lock these before writing markup. Don't drift from them while building.
 
+### Reference: JFM Joinery (helixsolution.au/lp/jfm-joinery.html)
+
+Use this site as the **house reference** for visual confidence, type, and editorial dark-mode craft. Don't clone it section-for-section, but borrow the vocabulary:
+
+- **Dark-first layered surfaces.** Stack near-blacks rather than one flat colour: e.g. `--black #0a0a0a`, `--dark #111`, `--dark2 #181818`, `--card #1e1e1e`. One brand-warm accent on top (JFM uses amber `#e07b1a`).
+- **Type contrast as the hero.** A strong condensed display (JFM uses Bebas Neue) against a clean grotesk body (Inter). Display in all-caps with wide letter-spacing (2–8px), body in sentence case. Hierarchy is visible from across the room.
+- **Eyebrow rules.** A short 2px coloured rule (~36–40px) sits before every section kicker — small move, big rhythm.
+- **Atmospheric imagery.** Photos are filtered down (`brightness(.7) saturate(.85)`) and overlaid with a left-heavy linear gradient on heroes — content stays legible, image stays moody.
+- **Ghost numerals.** Oversized accent-coloured section/service numerals at low opacity (10–15%) give scannable hierarchy without shouting.
+- **Quiet motion details.** Border-grow accents on hover (top or left rule animates from 0 to full), gentle image scale on hover (1.06×), an auto-scrolling accent ticker bar between sections.
+- **Faceted CTA shape.** Buttons use a slight parallelogram `clip-path` for a fabricated/industrial feel. Use sparingly — once per site is enough.
+- **Honest placeholder watermarks.** When a real photo is missing, JFM stamps a centred uppercase `PLACEHOLDER` with letter-spacing, semi-transparent white on a dark plate — the reviewer can never miss it. Match this treatment.
+
+Take the *attitude* from JFM (confident, editorial, craft-forward, dark-first) and translate it through the company you're building for. A wellness studio shouldn't end up looking like a joinery — but it should still feel as considered.
+
+### Theme: dark default + light toggle
+
+Every site ships with **both a dark and a light theme**. Dark is the default.
+
+- Drive every colour through CSS custom properties on `:root` (default dark) and override on `[data-theme="light"]`. Don't hard-code colours in component rules.
+- Provide a small toggle in the nav (sun/moon icon, 44×44 tap target). Persist the choice in `localStorage` under a stable key (e.g. `theme`). On load, read it before first paint to avoid a flash of the wrong theme.
+- Honour `prefers-color-scheme` only when the user hasn't picked one yet.
+- Both themes must pass WCAG AA for every text/background pair. Test both, don't ship one and assume the other follows.
+- Imagery filters and overlay strengths usually need to differ between themes — what reads as moody in dark may go muddy in light. Tune per theme.
+- Add a `<meta name="theme-color">` for each scheme via `media="(prefers-color-scheme: dark)"` / `light` so the mobile URL bar tints correctly.
+
 ### Palette
 - 2–3 primary colors max, plus near-black for text and off-white for surface.
 - Pulled from the logo. Test every text/background pair against WCAG AA — don't eyeball.
@@ -225,7 +251,8 @@ Before committing, ask:
 4. Does the palette actually relate to their logo?
 5. Is there one moment of visual delight — confident hero composition, strong section transition, considered detail?
 6. **Mobile, hard test:** on a 375px viewport, does it feel app-like? Sticky primary action reachable by thumb, no horizontal overflow at 320px, hero paints fast, transitions feel soft, "Add to Home Screen" opens into a clean app-like first screen?
-7. Did I invent any fact, service, credential, year, or testimonial?
+7. **Both themes:** does the site default to dark, toggle cleanly to light, persist the choice, pass AA in both, and avoid a flash of the wrong theme on load?
+8. Did I invent any fact, service, credential, year, or testimonial?
 
 Any "no" or any invented fact → fix before committing.
 
