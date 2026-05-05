@@ -57,6 +57,15 @@ Hard rules:
 - **Log provenance** in `sites/[slug]/images/SOURCES.md`: filename, original URL, source type, credit.
 - **Never source from random Google Image Search.** Only the four sources above.
 
+### Placeholder fallback
+If, after exhausting all four sources above, you still can't get a real image for a slot the design needs (hero, a specific service tile, a team shot), use a placeholder image with a **`PLACEHOLDER`** watermark stamped across it.
+
+- Use an industry-appropriate Unsplash/Pexels image as the base, but overlay the word `PLACEHOLDER` in large semi-transparent capitals (centered, ~50% opacity, contrasting color) so anyone reviewing the build can see at a glance it's not real.
+- Bake the watermark into the JPG (don't rely on a CSS overlay — it must travel with the file).
+- Mark each placeholder in `SOURCES.md` with a `placeholder: true` flag and a one-line note explaining what real image should replace it.
+- Track every placeholder in `brief.md` under a "Placeholders to replace" section so the deployer knows exactly what to swap before launch.
+- **Never** silently use a stock image without the watermark when no real source exists. The reviewer must always be able to tell real from placeholder.
+
 ### Logo and palette
 - Find their logo on their own site / Google profile / social headers. Download it.
 - Extract 2–3 brand colors from the logo. If no logo exists, derive from their industry and brand maturity:
@@ -159,6 +168,23 @@ One page. Single `index.html`. Smooth scroll between sections. Static — no fra
    - Visually distinct from earlier sections (color inversion, full-bleed, larger type)
    - Footer below: ABN, copyright, "Site by Helix" small credit
 
+### Mobile-first, app-like feel
+
+These sites are built mobile-first and must feel like a native app on a phone, not a desktop site that's been scaled down. Most visitors arrive on mobile — design for that surface first, then let it scale up.
+
+- **Design at 375px first.** Build the layout for a phone, then progressively enhance for larger screens. Don't design desktop-first and squash.
+- **Single-thumb reach.** Primary CTAs sit in the lower two-thirds of the viewport on mobile. Phone numbers are `tel:` links and tappable. Tap targets ≥ 44×44px. No hover-only interactions.
+- **Sticky bottom action bar** on mobile where it fits: phone / "Get a quote" / "Book" pinned to the bottom edge so the conversion path is always one tap away. Hide on desktop.
+- **Native-feel transitions.** Section changes feel like a swipe between cards or a paged reveal — soft, fast, momentum-friendly. No jank, no full-page flashes.
+- **Edge-to-edge imagery.** Full-bleed photos with no awkward gutters on the sides. Use `100vw` widths and `safe-area-inset-*` padding to respect notches and home indicators.
+- **System type & clean spacing.** Type scale comfortable to read at arm's length (body ≥ 16px to avoid iOS zoom-on-focus). Generous touch padding. Clear sectional rhythm.
+- **Smooth, momentum scrolling.** `-webkit-overflow-scrolling: touch` on any horizontally scrolling rails. Carousels snap (`scroll-snap-type`) and feel paged, not free-floating.
+- **No horizontal overflow, ever.** Test at 320px wide. Long words break, large headlines reflow, images stay contained.
+- **PWA basics.** Add a `<meta name="theme-color">` matching the palette so the URL bar tints. Provide an `apple-touch-icon` and a `manifest.webmanifest` with name, short_name, theme_color, background_color, and a 512px maskable icon. The site should be "Add to Home Screen"-ready.
+- **Test the home-screen install.** Saved to a phone home screen, the site should open into a full-bleed view that looks like an app's first screen — clear name, hero, primary action.
+- **Performance is mobile UX.** Hero must be visibly painted under 2.5s on a throttled mid-tier 4G connection. No layout shift after fonts load (use `font-display: swap` and tune line-height ahead of time).
+- **Respect `prefers-reduced-motion`.** Disable scroll-driven animations and momentum reveals when the user has it set.
+
 ### Animation and interaction
 
 - Smooth scroll between sections (CSS `scroll-behavior: smooth` is fine for static)
@@ -195,10 +221,10 @@ Before committing, ask:
 
 1. Would I believe this is a real, considered website if I landed here from Google?
 2. Is it bespoke to *this* company, or could the name be swapped for another?
-3. Does every photo trace to a real source in `SOURCES.md`?
+3. Does every photo trace to a real source in `SOURCES.md`? Are any placeholders clearly watermarked and listed in `brief.md`?
 4. Does the palette actually relate to their logo?
 5. Is there one moment of visual delight — confident hero composition, strong section transition, considered detail?
-6. On mobile: does it read well, do CTAs work with thumbs, do animations stay subtle?
+6. **Mobile, hard test:** on a 375px viewport, does it feel app-like? Sticky primary action reachable by thumb, no horizontal overflow at 320px, hero paints fast, transitions feel soft, "Add to Home Screen" opens into a clean app-like first screen?
 7. Did I invent any fact, service, credential, year, or testimonial?
 
 Any "no" or any invented fact → fix before committing.
