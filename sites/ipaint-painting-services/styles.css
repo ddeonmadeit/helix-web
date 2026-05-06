@@ -8,7 +8,7 @@
   --pad: clamp(20px, 4vw, 56px);
 }
 [data-theme="light"]{
-  --bg:#faf6f1; --bg2:#f1ead f; --bg2:#f1eadf; --bg3:#e7dccb; --line:rgba(20,12,6,.10);
+  --bg:#faf6f1; --bg2:#f1eadf; --bg3:#e7dccb; --line:rgba(20,12,6,.10);
   --ink:#1b130c; --ink2:#5a4a39; --ink3:#8a7762;
   --acc:#c1421a; --acc2:#a8341a; --acc-ink:#fff7eb;
   --surface:#fffaf2; --card:#fff;
@@ -32,8 +32,8 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 
 .wrap{max-width:var(--maxw); margin:0 auto; padding:0 var(--pad)}
 
-.display{font-family:'DM Serif Display',Georgia,serif; font-weight:400; letter-spacing:-.01em; line-height:.98}
-.display em{font-style:italic; color:var(--acc)}
+.display{font-family:'Archivo Black',impact,sans-serif; font-weight:900; letter-spacing:-.02em; line-height:.94}
+.display em{font-style:normal; color:var(--acc)}
 
 /* nav */
 .nav{
@@ -47,7 +47,7 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .brand{display:flex; align-items:center; gap:10px; font-weight:700; letter-spacing:-.01em}
 .brand__mark{
-  font-family:'DM Serif Display',serif; font-size:24px; line-height:1;
+  font-family:'Archivo Black',impact,sans-serif; font-size:24px; line-height:1;
   display:inline-flex; align-items:baseline; gap:3px;
 }
 .brand__dot{
@@ -117,7 +117,7 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 .btn--ghost:hover{border-color:var(--acc); color:var(--acc)}
 .hero__stats{display:grid; grid-template-columns:repeat(3, minmax(0,1fr)); gap:18px; max-width:580px; padding-top:24px; border-top:1px solid var(--line)}
 .hstat{display:flex; flex-direction:column; gap:4px}
-.hstat__val{font-family:'DM Serif Display',serif; font-size:clamp(20px, 3vw, 28px); color:var(--ink)}
+.hstat__val{font-family:'Archivo Black',impact,sans-serif; font-size:clamp(20px, 3vw, 28px); color:var(--ink)}
 .hstat__lbl{font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--ink3)}
 
 /* ticker */
@@ -127,7 +127,7 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .ticker__track{
   display:flex; gap:28px; white-space:nowrap;
-  font-family:'DM Serif Display',serif; font-size:clamp(18px,2.4vw,28px); letter-spacing:.01em;
+  font-family:'Archivo Black',impact,sans-serif; font-size:clamp(18px,2.4vw,28px); letter-spacing:.01em;
   animation: tick 38s linear infinite;
 }
 .ticker__track .sep{opacity:.55}
@@ -146,9 +146,9 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .quote::before{
   content:"“"; position:absolute; top:-20px; left:18px;
-  font-family:'DM Serif Display',serif; font-size:96px; color:var(--acc); line-height:1;
+  font-family:'Archivo Black',impact,sans-serif; font-size:96px; color:var(--acc); line-height:1;
 }
-.quote blockquote{margin:0 0 18px; font-family:'DM Serif Display',serif; font-size:22px; line-height:1.3; color:var(--ink)}
+.quote blockquote{margin:0 0 18px; font-size:17px; line-height:1.55; color:var(--ink)}
 .quote figcaption{font-size:12px; letter-spacing:.12em; text-transform:uppercase; color:var(--ink3); font-weight:600}
 
 /* services */
@@ -160,11 +160,11 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .svc-row:last-child{border-bottom:1px solid var(--line)}
 .svc-num{
-  font-family:'DM Serif Display',serif; font-size:clamp(46px,7vw,84px);
+  font-family:'Archivo Black',impact,sans-serif; font-size:clamp(46px,7vw,84px);
   color:var(--acc); opacity:.18; line-height:1; transition:opacity .4s;
 }
 .svc-row:hover .svc-num{opacity:.85}
-.svc-body h3{font-family:'DM Serif Display',serif; font-weight:400; font-size:clamp(26px,3.6vw,40px); margin:.05em 0 .35em; line-height:1.05}
+.svc-body h3{font-family:'Archivo Black',impact,sans-serif; font-weight:400; font-size:clamp(26px,3.6vw,40px); margin:.05em 0 .35em; line-height:1.05}
 .svc-body p{margin:0; max-width:54ch; color:var(--ink2)}
 .svc-media{display:none}
 @media(min-width:980px){
@@ -187,10 +187,10 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .step:hover{transform:translateY(-4px)}
 .step-num{
-  font-family:'DM Serif Display',serif; font-size:54px; color:var(--acc); opacity:.3;
+  font-family:'Archivo Black',impact,sans-serif; font-size:54px; color:var(--acc); opacity:.3;
   display:block; line-height:1; margin-bottom:14px;
 }
-.step h3{font-family:'DM Serif Display',serif; font-weight:400; font-size:24px; margin:0 0 10px; line-height:1.1}
+.step h3{font-family:'Archivo Black',impact,sans-serif; font-weight:400; font-size:24px; margin:0 0 10px; line-height:1.1}
 .step p{margin:0; color:var(--ink2); font-size:14.5px}
 
 /* showcase */
@@ -199,7 +199,7 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 .showcase__frame img{width:100%; height:auto; max-height:80vh; object-fit:cover; filter:brightness(.78) saturate(1.05)}
 [data-theme="light"] .showcase__frame img{filter:brightness(.95) saturate(1)}
 .showcase__frame figcaption{position:absolute; left:0; right:0; bottom:0; padding:40px var(--pad); background:linear-gradient(180deg, transparent, rgba(0,0,0,.7))}
-.pull{font-family:'DM Serif Display',serif; font-size:clamp(28px,5vw,56px); color:#fff; max-width:780px; display:block; line-height:1.05}
+.pull{font-family:'Archivo Black',impact,sans-serif; font-size:clamp(28px,5vw,56px); color:#fff; max-width:780px; display:block; line-height:1.05}
 
 /* cta */
 .cta{
@@ -220,10 +220,10 @@ button{font:inherit; cursor:pointer; border:0; background:none; color:inherit}
 }
 .cta__phone svg{width:24px; height:24px}
 .cta__phone small{display:block; font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.7; font-weight:600}
-.cta__phone strong{font-family:'DM Serif Display',serif; font-weight:400; font-size:24px}
+.cta__phone strong{font-family:'Archivo Black',impact,sans-serif; font-weight:400; font-size:24px}
 .cta__addr{display:flex; flex-direction:column; gap:4px; font-size:14px; opacity:.85}
 .cta__addr small{font-size:11px; letter-spacing:.1em; text-transform:uppercase; opacity:.6; font-weight:600}
-.cta__addr strong{font-family:'DM Serif Display',serif; font-weight:400; font-size:18px}
+.cta__addr strong{font-family:'Archivo Black',impact,sans-serif; font-weight:400; font-size:18px}
 
 /* form */
 .form{display:grid; gap:14px; grid-template-columns:1fr 1fr; max-width:760px}
