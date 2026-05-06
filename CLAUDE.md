@@ -73,6 +73,15 @@ The whole quality of the output comes from this phase. Spend real effort.
 - Identify their canonical presence: own website, Google Business profile, Facebook, Instagram, LinkedIn, industry directories.
 - If they have an existing website, fetch homepage and any about/services/work pages. This is the richest source.
 
+### When the input is a Google Maps link
+
+Google Maps is the source of truth for **what services the business actually offers** and **what photos represent their real work**. When the user gives you a maps URL:
+
+- Decode the listing's **category** from the URL (the `15s…` parameter often encodes it, e.g. `lawn_care_service`, `painter`, `excavating_contractor`). The category trumps any same-named website you find — a different business with the same name is not the right business.
+- Pull the exact services list from the listing's "Services" tab. If the maps page can't be fetched server-side (Google blocks most automated access), **ask the user once for a screenshot of the services list** before guessing — guessing services is what makes the site wrong.
+- Use the **owner-uploaded photos** from the listing as priority-2 imagery (after their own website). If the photos can't be fetched programmatically, ask the user to drop them into `sites/[slug]/images/` and proceed with watermarked placeholders for any slot still missing a real photo.
+- Never let a same-named website override the maps category. If maps says `lawn_care_service` and a website at the same name sells concrete cutting, those are two different businesses — build for the maps listing.
+
 ### Extract everything
 Write to `tmp/brief-[slug].md`:
 - Legal/trading name
