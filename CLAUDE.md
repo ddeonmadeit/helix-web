@@ -279,6 +279,7 @@ These sites are built mobile-first and must feel like a native app on a phone, n
 - Three competing gradients
 - AI-generated imagery of any kind
 - Any factual claim not traceable to research
+- Owner names, previous owner names, or any personal names anywhere on the site — copy, headings, CTAs, meta, JSON-LD, action bar, everywhere. Use generic phrasing ("Call us", "Get in touch", "Owner-operated") instead.
 
 ---
 
