@@ -77,9 +77,10 @@ The whole quality of the output comes from this phase. Spend real effort.
 
 Google Maps is the source of truth for **what services the business actually offers** and **what photos represent their real work**. When the user gives you a maps URL:
 
+- **Use the Playwright scraper first.** Run `node tools/fetch-gmaps.js "<url>"` — this renders the page in a real browser and extracts name, phone, address, rating, hours, photos, and tab text. It writes full HTML to `/tmp/gmaps.html` for offline parsing. This works in the sandbox environment (`ignoreHTTPSErrors: true`, chromium at `/opt/pw-browsers/chromium-1194/chrome-linux/chrome`).
 - Decode the listing's **category** from the URL (the `15s…` parameter often encodes it, e.g. `lawn_care_service`, `painter`, `excavating_contractor`). The category trumps any same-named website you find — a different business with the same name is not the right business.
-- Pull the exact services list from the listing's "Services" tab. If the maps page can't be fetched server-side (Google blocks most automated access), **ask the user once for a screenshot of the services list** before guessing — guessing services is what makes the site wrong.
-- Use the **owner-uploaded photos** from the listing as priority-2 imagery (after their own website). If the photos can't be fetched programmatically, ask the user to drop them into `sites/[slug]/images/` and proceed with watermarked placeholders for any slot still missing a real photo.
+- Pull the exact services list from the listing's "Services" tab (the scraper tries this). If the Services tab is empty (common for small businesses), fall back to the category from the URL and the About tab text.
+- **Download owner-uploaded photos** directly from the scraper's `photos` array — these are `lh3.googleusercontent.com` URLs already upgraded to `w2000-h2000` resolution. Use `curl -L` to download them.
 - Never let a same-named website override the maps category. If maps says `lawn_care_service` and a website at the same name sells concrete cutting, those are two different businesses — build for the maps listing.
 
 ### Extract everything
