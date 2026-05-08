@@ -23,7 +23,9 @@ One job: research a company, build a complete distinctive one-page site, commit 
 - **No progress checks.** No `ls`, `pwd`, `git status`, `identify` between steps — only when the output changes a decision.
 - **Don't re-read your own writes.** Edit/Write errors on failure — trust it.
 - **Write each site file once.** No draft-then-tweak. Editing a freshly-written file is a smell.
-- **Image verification — one pass only.** After the curl block run `ls -lh` once. Replace any file under 15KB (failed download). Read() up to 3 Unsplash images you're uncertain about — better to catch wrong subjects now than rebuild later. Never open known-good Google Maps or own-site photos.
+- **Image verification — one pass only.** After the curl block run `ls -lh` once. <15KB = failed download, replace it. <50KB = too small/low-res for a full-bleed hero — fall back to type-led (recipe in Phase 3). Read() up to 3 Unsplash images you're uncertain about. Never open known-good Maps or own-site photos.
+- **Parallel curls use absolute paths.** `cd dir && curl -o a.jpg & curl -o b.jpg &` — the second `&`-backgrounded curl runs in the parent shell's CWD, not the `cd`'d one. Always pass full absolute `-o` paths.
+- **Differentiate the accent.** Each new site gets its own colour — never reuse last week's. Pull from logo, real photo content (kitchen sage wall, rural sky, deck timber, brick warmth), or industry archetype.
 - **Icons in one Pillow script.** All sizes (192, 512, maskable-512, apple-touch-180) in one Python call.
 - **No owner/personal names anywhere** on the site — copy, headings, CTAs, meta, JSON-LD. Use "Call us", "Get in touch", "Owner-operated".
 - **Final reply is the five hand-off bullets only.** Nothing else.
@@ -66,7 +68,7 @@ Name · phone · address · services · hours · real testimonials/credentials �
 1. Their own website
 2. Google Maps owner photos (scraper output)
 3. Public Facebook / Instagram
-4. Unsplash — industry-specific terms (`timber deck merbau`, `commercial kitchen interior`, `concrete pour`). Never generic ("happy team", "business meeting").
+4. Unsplash — industry-specific terms (`timber deck merbau`, `commercial kitchen interior`, `concrete pour`). Never generic ("happy team", "business meeting"). **Don't guess `images.unsplash.com/photo-<ID>` URLs** — new-format IDs (e.g. `NcFBGQBiRDo`) won't resolve. WebFetch the Unsplash photo page first, extract the real CDN URL from `<meta property="og:image">`, then curl it.
 
 Never hotlink. Never generate images. Never source from Google Image Search.
 
@@ -118,6 +120,19 @@ sites/[slug]/
 - `.hero` padding: `padding: 80px 0 92px` — the 80px top clears the fixed nav on all screen sizes and prevents content overflowing upward into it.
 - Heading font size: `clamp(4rem, 9vw, 7rem)` — caps at 7rem (112px) on desktop so two-line headings never overflow the viewport height.
 - Serif display variant (luxury): `clamp(3.5rem, 8vw, 6.5rem)` — slightly smaller to account for heavier weight.
+
+**Type-led hero (no usable photo):** The dependable recipe — `.hero__bg` is `position: absolute; inset: 0; background: var(--bg)`. Add three layers:
+1. `::before` — radial-gradient dot pattern at 5–7% accent, `background-size: 36px 36px`
+2. `::after` — radial glow ~70vw, `top: 45%; left: 28%`, 12–15% accent → transparent at 65%
+3. `.hero__ghost` — giant brand mark (initials, monogram, or category SVG outline) in Bebas Neue at `clamp(7rem, 22vw, 18rem)`, 3–4% accent, `position: absolute; right: -4%; top: 50%; transform: translateY(-50%); white-space: nowrap`
+
+Trigger when the only photo is logo-on-white, <50KB, wrong subject, or actively bad. Don't keep hunting Unsplash.
+
+**Business type → treatment cheat sheet:**
+- Trades / industrial / services → Bebas Neue + Inter, ticker, parallelogram clip-path CTA, 6-card service grid, ghost numerals
+- Real estate / luxury / heritage → Cormorant Garamond + Inter, no ticker, no clip-path, thin 1px rules, generous whitespace, italic emphasis on key words
+- Hospitality / wellness → palette pulled from food/interior, mid-weight serif, photo-led
+- Retail / antique / craft → muted earth tones, serif display, italic, smaller card grids
 
 **Mobile-first:** Design at 375px first. Sticky bottom call bar (hide on desktop). Tap targets ≥ 44px. `tel:` links. No horizontal overflow at 320px. `env(safe-area-inset-*)` padding for notches. Hero paints under 2.5s on mid-tier 4G (hero < 300KB, others < 150KB). `loading="lazy"` on below-fold images.
 
