@@ -44,41 +44,39 @@ img { display: block; max-width: 100%; }
 [data-theme="dark"] .icon-sun { display: block; } [data-theme="dark"] .icon-moon { display: none; }
 [data-theme="light"] .icon-sun { display: none; } [data-theme="light"] .icon-moon { display: block; }
 
-.hero { position: relative; min-height: 100svh; display: flex; align-items: flex-end; padding: 80px 0 92px; overflow: hidden; }
-.hero__bg { position: absolute; inset: 0; background: var(--bg); }
+.hero { position: relative; min-height: 100svh; display: flex; align-items: center; justify-content: center; padding: 80px 0 92px; overflow: hidden; }
+.hero__bg { position: absolute; inset: 0; }
+/* Sky gradient: deep forest top → mid green → lighter horizon */
+.hero__bg {
+  background:
+    linear-gradient(to bottom, #060c04 0%, #0d1a08 35%, #152a0c 62%, #1e3d10 78%, #274f14 88%, #2f6018 94%, #3a7a1e 100%);
+}
+/* Layered atmospheric haze + glow from below */
 .hero__bg::before {
   content: '';
   position: absolute; inset: 0;
-  background-image: radial-gradient(circle, rgba(124,192,76,.07) 1px, transparent 1px);
-  background-size: 36px 36px;
+  background:
+    radial-gradient(ellipse 90% 40% at 50% 110%, rgba(58,122,30,.55) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 30% at 50% 105%, rgba(124,192,76,.25) 0%, transparent 55%),
+    radial-gradient(ellipse 100% 50% at 50% 0%, rgba(6,12,4,.8) 0%, transparent 60%);
 }
+/* Repeating grass blade silhouette strip along the bottom */
 .hero__bg::after {
   content: '';
   position: absolute;
-  top: 45%; left: 28%;
-  width: 70vw; height: 70vw;
-  transform: translate(-50%, -50%);
-  background: radial-gradient(circle, rgba(124,192,76,.13) 0%, transparent 65%);
+  bottom: 0; left: 0; right: 0;
+  height: 22%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='120' viewBox='0 0 80 120'%3E%3Cpath d='M10 120 Q8 80 14 40 Q16 20 12 0 Q18 22 20 50 Q22 80 18 120Z' fill='%233a7a1e' opacity='.9'/%3E%3Cpath d='M24 120 Q26 70 32 30 Q35 10 30 0 Q38 15 36 45 Q34 78 30 120Z' fill='%234a9626' opacity='.85'/%3E%3Cpath d='M40 120 Q36 75 40 38 Q42 14 38 2 Q46 18 44 48 Q42 82 40 120Z' fill='%232d6014' opacity='.95'/%3E%3Cpath d='M52 120 Q54 68 60 28 Q63 8 58 0 Q66 14 64 44 Q62 76 58 120Z' fill='%235ab030' opacity='.8'/%3E%3Cpath d='M66 120 Q64 78 68 45 Q70 22 66 5 Q74 20 72 52 Q70 84 66 120Z' fill='%233e8820' opacity='.88'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-position: bottom center;
+  background-size: 80px auto;
   pointer-events: none;
 }
-.hero__ghost {
-  position: absolute;
-  top: 50%; right: -4%;
-  transform: translateY(-50%);
-  font-family: 'Bebas Neue', sans-serif;
-  font-size: clamp(7rem, 22vw, 18rem);
-  color: rgba(124,192,76,.045);
-  letter-spacing: -0.01em;
-  line-height: 0.9;
-  pointer-events: none;
-  white-space: nowrap;
-  user-select: none;
-}
-.hero__content { position: relative; z-index: 2; padding: 0 28px; max-width: 640px; }
+.hero__content { position: relative; z-index: 2; padding: 0 28px; max-width: 640px; text-align: center; margin: 0 auto; }
 .hero__eyebrow { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.26em; color: var(--accent); margin-bottom: 14px; text-transform: uppercase; }
 .hero__heading { font-family: 'Bebas Neue', sans-serif; font-size: clamp(4rem, 9vw, 7rem); line-height: 0.92; letter-spacing: 0.01em; color: var(--text); margin-bottom: 22px; }
-.hero__sub { font-size: clamp(0.95rem, 2.2vw, 1.1rem); color: rgba(232,238,219,.74); line-height: 1.6; max-width: 480px; margin-bottom: 34px; }
-.hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; }
+.hero__sub { font-size: clamp(0.95rem, 2.2vw, 1.1rem); color: rgba(232,238,219,.74); line-height: 1.6; max-width: 480px; margin: 0 auto 34px; }
+.hero__ctas { display: flex; flex-wrap: wrap; gap: 14px; justify-content: center; }
 .hero__scroll { position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%); color: rgba(255,255,255,.22); font-size: 1.3rem; z-index: 2; animation: bob 2s ease-in-out infinite; }
 @keyframes bob { 0%,100%{transform:translateX(-50%) translateY(0)} 50%{transform:translateX(-50%) translateY(8px)} }
 
