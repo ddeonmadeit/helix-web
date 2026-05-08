@@ -51,6 +51,7 @@ Returns: name, phone, hours, rating, `photos[]` (lh3.googleusercontent.com, pre-
 - **Category from the `15s…` URL param** (e.g. `lawn_care_service`, `painter`) is the source of truth. A same-named website selling something different is a different business — ignore it.
 - If Services tab empty, use category + About tab to infer services.
 - Download scraper `photos[]` directly with `curl -L` — these are real owner photos, priority 2.
+- **Logo scan — one Read() pass, no extra tool calls.** After downloading all `photos[]`, Read() each in a single parallel batch (max 4). Look for a logo or branded graphic for colour extraction. If found, use it for the palette; if not, move on — don't search further.
 
 ### All other inputs
 
