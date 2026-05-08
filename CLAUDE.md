@@ -114,6 +114,11 @@ sites/[slug]/
 5. **Visual** — full-bleed photo, one pull quote or short caption
 6. **CTA + Footer** — phone + address, visually distinct (colour inversion or full-bleed), copyright + "Site by Helix"
 
+**Hero sizing — always use these values:**
+- `.hero` padding: `padding: 80px 0 92px` — the 80px top clears the fixed nav on all screen sizes and prevents content overflowing upward into it.
+- Heading font size: `clamp(4rem, 9vw, 7rem)` — caps at 7rem (112px) on desktop so two-line headings never overflow the viewport height.
+- Serif display variant (luxury): `clamp(3.5rem, 8vw, 6.5rem)` — slightly smaller to account for heavier weight.
+
 **Mobile-first:** Design at 375px first. Sticky bottom call bar (hide on desktop). Tap targets ≥ 44px. `tel:` links. No horizontal overflow at 320px. `env(safe-area-inset-*)` padding for notches. Hero paints under 2.5s on mid-tier 4G (hero < 300KB, others < 150KB). `loading="lazy"` on below-fold images.
 
 **Animation:** Fade-up on scroll (IntersectionObserver, ≤ 600ms, fires once, staggered children). Hover states on all interactive elements. Respect `prefers-reduced-motion`.
