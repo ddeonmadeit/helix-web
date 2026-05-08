@@ -3,5 +3,5 @@
 | File | Source | Notes |
 |---|---|---|
 | cover.jpg | Google Maps (owner photo) | Shop front exterior, The Walk Arcade, 786KB original |
-| hero.jpg | Derived from cover.jpg | Cropped to 1400×700, desaturated + sepia toned, JPEG q80 |
+| hero.jpg | Unsplash — photo-1516615899477 (flat lay vintage cameras & books) | Cropped to 1400×875, desaturated + sepia toned, JPEG q82 |
 | icon-*.png | Generated (Pillow) | Brand icon, warm near-black bg + antique gold |

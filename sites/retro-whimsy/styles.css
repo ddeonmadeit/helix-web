@@ -1,24 +1,24 @@
 :root {
-  --bg: #1c1710;
-  --surface: #251f14;
-  --card: #2e2618;
-  --text: #f5efe4;
-  --muted: #9e9080;
-  --accent: #b8955a;
-  --accent-light: #caa96e;
-  --border: rgba(184,149,90,.14);
-  --hero-grad: linear-gradient(to right, rgba(28,23,16,.92) 0%, rgba(28,23,16,.6) 60%, rgba(28,23,16,.2) 100%);
+  --bg: #130d07;
+  --surface: #1e1409;
+  --card: #271a0d;
+  --text: #ede8df;
+  --muted: #8e7a65;
+  --accent: #9c6b36;
+  --accent-light: #ad7a43;
+  --border: rgba(156,107,54,.14);
+  --hero-grad: linear-gradient(to right, rgba(19,13,7,.93) 0%, rgba(19,13,7,.62) 58%, rgba(19,13,7,.18) 100%);
 }
 [data-theme="light"] {
-  --bg: #faf5eb;
-  --surface: #f2e8d2;
-  --card: #fff;
-  --text: #1c1710;
-  --muted: #6b5e48;
-  --accent: #8b6935;
-  --accent-light: #a07c42;
-  --border: rgba(107,78,44,.13);
-  --hero-grad: linear-gradient(to right, rgba(28,23,16,.9) 0%, rgba(28,23,16,.55) 60%, rgba(28,23,16,.15) 100%);
+  --bg: #f7f0e4;
+  --surface: #ede3cf;
+  --card: #fffbf4;
+  --text: #130d07;
+  --muted: #7a6248;
+  --accent: #7a4e22;
+  --accent-light: #8c5c2c;
+  --border: rgba(122,78,34,.13);
+  --hero-grad: linear-gradient(to right, rgba(19,13,7,.9) 0%, rgba(19,13,7,.56) 58%, rgba(19,13,7,.14) 100%);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -46,7 +46,7 @@ img { display: block; max-width: 100%; }
 
 .hero { position: relative; min-height: 100svh; display: flex; align-items: center; overflow: hidden; }
 .hero__bg { position: absolute; inset: 0; }
-.hero__img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(.55) saturate(.7) sepia(.25); }
+.hero__img { width: 100%; height: 100%; object-fit: cover; object-position: center 40%; filter: brightness(.58) saturate(.6) sepia(.35); }
 .hero__overlay { position: absolute; inset: 0; background: var(--hero-grad); }
 .hero__content { position: relative; z-index: 2; padding: 120px 28px 96px; max-width: 640px; }
 .hero__eyebrow { font-family: 'Lora', serif; font-size: 0.72rem; font-weight: 600; letter-spacing: 0.22em; color: var(--accent); margin-bottom: 20px; text-transform: uppercase; }
