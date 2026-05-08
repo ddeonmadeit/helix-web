@@ -1,0 +1,13 @@
+{
+  "name": "Retro Whimsy",
+  "short_name": "Retro Whimsy",
+  "start_url": "/sites/retro-whimsy/",
+  "display": "standalone",
+  "background_color": "#1c1710",
+  "theme_color": "#b8955a",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
