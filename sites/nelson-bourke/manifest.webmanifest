@@ -1,0 +1,13 @@
+{
+  "name": "Nelson Bourke",
+  "short_name": "Nelson Bourke",
+  "start_url": "/sites/nelson-bourke/",
+  "display": "standalone",
+  "background_color": "#0e0f10",
+  "theme_color": "#c8b89a",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
