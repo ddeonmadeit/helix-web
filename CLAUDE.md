@@ -137,7 +137,14 @@ Write `index.html`, `styles.css`, `script.js` as three parallel Write calls. Ico
 - No invented facts, services, credentials, or testimonials
 - No wrong or unverified images (caught in Phase 1 size check + spot reads)
 - Both dark and light themes render correctly
-- Sticky mobile bar present, no horizontal overflow
+- **Mobile checklist — verify in CSS, no extra tool calls:**
+  - `.hero` has `padding: 80px 0 92px` (nav clearance)
+  - Hero heading uses `clamp(4rem, 9vw, 7rem)` or smaller — never a bare `rem` or `px` value
+  - Sticky bottom bar present, hidden at `min-width: 640px`, uses `env(safe-area-inset-bottom)`
+  - All phone numbers are `href="tel:..."` links
+  - All below-fold images have `loading="lazy"`
+  - No element wider than `100vw` — no fixed `px` widths that could overflow at 320px
+  - Tap targets (buttons, links) use `min-height: 48px` or `padding` that achieves ≥ 44px
 
 Fix anything that fails, then commit.
 
