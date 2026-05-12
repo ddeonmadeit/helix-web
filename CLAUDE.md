@@ -102,9 +102,70 @@ sites/[slug]/
 
 ## Phase 3 — Design
 
-**House reference:** JFM Joinery (`helixsolution.au/lp/jfm-joinery.html`) — dark layered near-black surfaces, Bebas Neue display vs Inter body, eyebrow colour rules (2px accent bar before every section kicker), ghost numerals at 10% opacity, auto-scrolling accent ticker between sections, `brightness(.7) saturate(.85)` on hero photos with a left-heavy gradient overlay. Translate the *attitude*, not the layout.
+**House template:** Jarrad's Gardening (`jarradsgardening.com.au`) is the canonical reference. Use it for structure, spacing, component patterns, and attitude. Every element below comes from that build.
 
-**Type:** 2 fonts max. Bebas Neue + Inter is the house default. Swap to a serif display only when the company's positioning clearly demands it (heritage brand, editorial). Google Fonts only. `font-display: swap`.
+**CSS architecture:**
+- Container: `--maxw: 1280px; --px: clamp(20px, 5vw, 64px)` — apply to `.wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--px) }`
+- Colours: always CSS custom properties on `:root`. Use `color-mix(in srgb, var(--accent) 22%, transparent)` instead of hardcoded `rgba()` for opacity variants — it adapts automatically to theme changes
+- Surface layers: `--bg` → `--s1` → `--s2` → `--card` (four steps of depth, each slightly lighter)
+- `::selection { background: var(--accent); color: #0e1410 }` — always include
+- Add a `.skip` skip-nav link for accessibility
+
+**Type:** 2 fonts max. **Barlow Condensed** (700, uppercase) + **Inter** is the house default — not Bebas Neue. Swap to Cormorant Garamond + Inter only for luxury/heritage. Google Fonts only, `font-display: swap`.
+- Display class: `.display { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: .01em; line-height: .95 }` — apply to all headings
+- Section heading size: `clamp(38px, 6vw, 82px)` for section titles; `clamp(64px, 13vw, 170px)` for the hero h1
+- Kicker/eyebrow: `inline-flex; gap: 14px; font-size: 11px; font-weight: 700; letter-spacing: .26em; text-transform: uppercase; color: var(--accent)` with a `<span class="rule">` (36px × 2px accent bar) as the first child
+
+**Nav:**
+- Fixed, `height: 64px`, `background: color-mix(in srgb, var(--bg) 88%, transparent)`, `backdrop-filter: blur(10px)`, `border-bottom: 1px solid var(--border)`
+- Brand mark: company initials in Barlow Condensed 700 + accent dot (`7px × 7px border-radius: 50%`)
+- Nav links: underline-slide animation — `::after { content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--accent); transition: right .3s }` → `:hover::after { right: 0 }`
+- Nav CTA pill button: `border-radius: 999px; background: var(--accent); color: #0e1410; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: 10px 22px`
+
+**Buttons — always pill-shaped:**
+- `border-radius: 999px` on all buttons and the sticky mobile bar
+- Primary: `background: var(--accent); color: #0e1410` (dark text on light accent) or `color: #fff` if accent is dark
+- Ghost: `background: transparent; border: 1px solid var(--border2); color: var(--text)` → hover: `border-color: var(--accent); color: var(--accent)`
+- Include arrow SVG icon that translates +4px on hover: `.btn:hover svg { transform: translateX(4px) }`
+- `min-height: 48px; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase`
+
+**Hero:**
+- `min-height: 100svh; display: flex; align-items: flex-end; padding-top: 64px` (nav height)
+- Photo: `filter: var(--imgf)` where `--imgf: brightness(.78) saturate(.92)` dark / `brightness(.95) saturate(1)` light
+- Veil: two-layer `--veil` — left-heavy horizontal fade + bottom-up gradient, both stored as a single custom property
+- **Hero stats row** below copy: border-top separator, individual stats each with `border-right: 1px solid var(--border)`. Stat value in Barlow Condensed accent colour, label in 11px uppercase muted
+
+**Services — list rows, not card grid:**
+- `<ul>` with `border-top: 1px solid var(--border2)`, each `<li>` `border-bottom: 1px solid var(--border)`
+- Row grid: `grid-template-columns: 72px 1fr auto` — faded number | text body | optional media thumbnail
+- Large number: Barlow Condensed 700, `clamp(38px–46px)`, `color-mix(in srgb, var(--accent) 22%, transparent)`
+- **Hover background slide**: `::before { position:absolute; top:0; left:-4px; right:100%; bottom:0; background:var(--s1); transition: right .45s cubic-bezier(.2,.7,.2,1) }` → `:hover::before { right: -4px }`
+- Service thumbnail (right column): `aspect-ratio: 3/2; border-radius: 6px; overflow: hidden` with scale-up on row hover
+- Hide thumbnail at `max-width: 760px`
+
+**Process section:**
+- 4-column grid with `border-left: 1px solid var(--border)` separators (first child has no border-left)
+- Top accent bar: `::after { height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left }` → `:hover::after { transform: scaleX(1) }`
+- Step number: Barlow Condensed 700, `38px`, accent colour
+
+**Showcase/Visual section:**
+- `<figure>` with `border-radius: 6px; overflow: hidden`
+- Caption: `position: absolute; bottom/left/right: clamp(18px, 3vw, 36px)` — glassmorphism card (`color-mix(in srgb, var(--bg) 82%, transparent)`, `border: 1px solid var(--border2)`, `border-radius: 4px`)
+
+**CTA section:**
+- Background `var(--s2)`, radial glow `::before` at `88% 8%`
+- Contact form: underline-only inputs (`border: 0; border-bottom: 1px solid var(--border2)`), focus state changes border to accent
+- 2-column grid form, `.wide` spans full width
+
+**Mobile sticky bar:**
+- Full-width pill: `border-radius: 999px; height: 52px; width: 100%; background: var(--accent)`
+- `position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom))`
+- `display: none` → `display: block` at `max-width: 720px`
+
+**Animations:**
+- Reveal: `opacity: 0; transform: translateY(16px)` → `.is-in { opacity: 1; transform: none }`, `transition: opacity .5s ease, transform .5s cubic-bezier(.2,.7,.2,1)`
+- Stagger via `transition-delay` on nth-child, max ~.25s
+- Always include `@media (prefers-reduced-motion: reduce)` reset block
 
 **Dark/light theme:** Dark is default. Every colour in CSS custom properties on `:root`, override on `[data-theme="light"]`. Toggle in nav (sun/moon, 44×44 tap target), persist to `localStorage`, honour `prefers-color-scheme` only when no saved pref. Both themes pass WCAG AA. `<meta name="theme-color">` for each scheme.
 
@@ -117,9 +178,9 @@ sites/[slug]/
 6. **CTA + Footer** — phone + address, visually distinct (colour inversion or full-bleed), copyright + "Site by Helix"
 
 **Hero sizing — always use these values:**
-- `.hero` padding: `padding: 80px 0 92px` — the 80px top clears the fixed nav on all screen sizes and prevents content overflowing upward into it.
-- Heading font size: `clamp(4rem, 9vw, 7rem)` — caps at 7rem (112px) on desktop so two-line headings never overflow the viewport height.
-- Serif display variant (luxury): `clamp(3.5rem, 8vw, 6.5rem)` — slightly smaller to account for heavier weight.
+- `.hero` padding-top: `64px` (nav height). Bottom padding: `clamp(56px, 8vw, 100px)`
+- Hero h1 font size: `clamp(64px, 13vw, 170px)` — Barlow Condensed 700
+- Serif display variant (luxury): `clamp(3.5rem, 8vw, 6.5rem)` — Cormorant Garamond, slightly smaller for weight
 
 **Type-led hero (no usable photo):** The dependable recipe — `.hero__bg` is `position: absolute; inset: 0; background: var(--bg)`. Add three layers:
 1. `::before` — radial-gradient dot pattern at 5–7% accent, `background-size: 36px 36px`
@@ -131,8 +192,8 @@ Trigger when the only photo is logo-on-white, <50KB, wrong subject, or actively 
 **Buttons — always symmetrical, slightly rounded corners (`border-radius: 4px–6px`). Never use `clip-path` parallelogram styling** — it looks broken on screens and breaks the ghost button pairing. Primary button: solid accent fill, white text. Ghost button: transparent with `border: 1px solid`. Both `min-height: 48px`.
 
 **Business type → treatment cheat sheet:**
-- Trades / industrial / services → Bebas Neue + Inter, ticker, rounded CTA buttons, 6-card service grid, ghost numerals
-- Real estate / luxury / heritage → Cormorant Garamond + Inter, no ticker, thin 1px rules, generous whitespace, italic emphasis on key words
+- Trades / industrial / services → Barlow Condensed + Inter, ticker, pill buttons, service list-rows, hero stats
+- Real estate / luxury / heritage → Cormorant Garamond + Inter, no ticker, thin 1px rules, generous whitespace, italic emphasis
 - Hospitality / wellness → palette pulled from food/interior, mid-weight serif, photo-led
 - Retail / antique / craft → muted earth tones, serif display, italic, smaller card grids
 
@@ -155,8 +216,8 @@ Write `index.html`, `styles.css`, `script.js` as three parallel Write calls. Ico
 - No wrong or unverified images (caught in Phase 1 size check + spot reads)
 - Both dark and light themes render correctly
 - **Mobile checklist — verify in CSS, no extra tool calls:**
-  - `.hero` has `padding: 80px 0 92px` (nav clearance)
-  - Hero heading uses `clamp(4rem, 9vw, 7rem)` or smaller — never a bare `rem` or `px` value
+  - `.hero` has `padding-top: 64px` (nav height clearance)
+  - Hero h1 uses `clamp(64px, 13vw, 170px)` — never a bare `rem` or `px` value
   - Sticky bottom bar present, hidden at `min-width: 640px`, uses `env(safe-area-inset-bottom)`
   - All phone numbers are `href="tel:..."` links
   - All below-fold images have `loading="lazy"`
