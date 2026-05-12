@@ -102,7 +102,7 @@ sites/[slug]/
 
 ## Phase 3 — Design
 
-**House reference:** JFM Joinery (`helixsolution.au/lp/jfm-joinery.html`) — dark layered near-black surfaces, Bebas Neue display vs Inter body, eyebrow colour rules (2px accent bar before every section kicker), ghost numerals at 10% opacity, auto-scrolling accent ticker between sections, parallelogram `clip-path` on the primary CTA, `brightness(.7) saturate(.85)` on hero photos with a left-heavy gradient overlay. Translate the *attitude*, not the layout.
+**House reference:** JFM Joinery (`helixsolution.au/lp/jfm-joinery.html`) — dark layered near-black surfaces, Bebas Neue display vs Inter body, eyebrow colour rules (2px accent bar before every section kicker), ghost numerals at 10% opacity, auto-scrolling accent ticker between sections, `brightness(.7) saturate(.85)` on hero photos with a left-heavy gradient overlay. Translate the *attitude*, not the layout.
 
 **Type:** 2 fonts max. Bebas Neue + Inter is the house default. Swap to a serif display only when the company's positioning clearly demands it (heritage brand, editorial). Google Fonts only. `font-display: swap`.
 
@@ -128,9 +128,11 @@ sites/[slug]/
 
 Trigger when the only photo is logo-on-white, <50KB, wrong subject, or actively bad. Don't keep hunting Unsplash.
 
+**Buttons — always symmetrical, slightly rounded corners (`border-radius: 4px–6px`). Never use `clip-path` parallelogram styling** — it looks broken on screens and breaks the ghost button pairing. Primary button: solid accent fill, white text. Ghost button: transparent with `border: 1px solid`. Both `min-height: 48px`.
+
 **Business type → treatment cheat sheet:**
-- Trades / industrial / services → Bebas Neue + Inter, ticker, parallelogram clip-path CTA, 6-card service grid, ghost numerals
-- Real estate / luxury / heritage → Cormorant Garamond + Inter, no ticker, no clip-path, thin 1px rules, generous whitespace, italic emphasis on key words
+- Trades / industrial / services → Bebas Neue + Inter, ticker, rounded CTA buttons, 6-card service grid, ghost numerals
+- Real estate / luxury / heritage → Cormorant Garamond + Inter, no ticker, thin 1px rules, generous whitespace, italic emphasis on key words
 - Hospitality / wellness → palette pulled from food/interior, mid-weight serif, photo-led
 - Retail / antique / craft → muted earth tones, serif display, italic, smaller card grids
 
