@@ -1,0 +1,13 @@
+{
+  "name": "Turnkey Auto Detailing",
+  "short_name": "Turnkey Detailing",
+  "start_url": "/sites/turnkey-auto-detailing/",
+  "display": "standalone",
+  "background_color": "#0c0c0e",
+  "theme_color": "#d8392f",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
