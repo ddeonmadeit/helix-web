@@ -1,0 +1,13 @@
+{
+  "name": "S.E Outdoor Maintenance",
+  "short_name": "SE Outdoor",
+  "start_url": "/sites/se-outdoor-maintenance/",
+  "display": "standalone",
+  "background_color": "#0f120c",
+  "theme_color": "#c9a544",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
