@@ -1,0 +1,13 @@
+{
+  "name": "Memory Lane Store",
+  "short_name": "Memory Lane",
+  "start_url": "/sites/memory-lane-store/",
+  "display": "standalone",
+  "background_color": "#110f0c",
+  "theme_color": "#c4962b",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
