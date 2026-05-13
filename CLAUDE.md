@@ -148,10 +148,6 @@ sites/[slug]/
 - Top accent bar: `::after { height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left }` → `:hover::after { transform: scaleX(1) }`
 - Step number: Barlow Condensed 700, `38px`, accent colour
 
-**Showcase/Visual section:**
-- `<figure>` with `border-radius: 6px; overflow: hidden`
-- Caption: `position: absolute; bottom/left/right: clamp(18px, 3vw, 36px)` — glassmorphism card (`color-mix(in srgb, var(--bg) 82%, transparent)`, `border: 1px solid var(--border2)`, `border-radius: 4px`)
-
 **CTA section:**
 - Background `var(--s2)`, radial glow `::before` at `88% 8%`
 - Contact form: underline-only inputs (`border: 0; border-bottom: 1px solid var(--border2)`), focus state changes border to accent
@@ -172,10 +168,9 @@ sites/[slug]/
 **Sections (in order):**
 1. **Hero** — real photo or strong type treatment, headline in their voice, one primary CTA (`tel:` for trades/services)
 2. **Credibility** — real testimonials / Google rating / verifiable credentials only. Cut the section if nothing real exists. Never fabricate.
-3. **Services** — 3–6 actual services, one specific sentence each, consistent icon or photo treatment
+3. **Services** — 3–6 actual services, one specific sentence each, list-row treatment
 4. **Process** — 3–5 real steps, numbered, scannable at a glance
-5. **Visual** — full-bleed photo, one pull quote or short caption
-6. **CTA + Footer** — phone + address, visually distinct (colour inversion or full-bleed), copyright + "Site by Helix"
+5. **CTA + Footer** — phone + address, visually distinct, copyright + "Site by Helix"
 
 **Hero sizing — always use these values:**
 - `.hero` padding-top: `64px` (nav height). Bottom padding: `clamp(56px, 8vw, 100px)`
