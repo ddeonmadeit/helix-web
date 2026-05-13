@@ -1,0 +1,13 @@
+{
+  "name": "The Rusty Spud",
+  "short_name": "Rusty Spud",
+  "start_url": "/sites/rusty-spud/",
+  "display": "standalone",
+  "background_color": "#150c0a",
+  "theme_color": "#c03428",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
