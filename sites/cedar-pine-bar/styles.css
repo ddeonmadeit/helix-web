@@ -14,7 +14,7 @@ ul { list-style: none }
   --card:      #352e12;
   --text:      #f2ead4;
   --muted:     #8a8264;
-  --accent:    #c9b228;
+  --accent:    #d4861c;
   --on-accent: #141208;
   --border:    rgba(242,234,212,.1);
   --border2:   rgba(242,234,212,.16);
@@ -38,7 +38,7 @@ ul { list-style: none }
   --card:      #ddd6b4;
   --text:      #1e1a0e;
   --muted:     #6a6248;
-  --accent:    #9a8814;
+  --accent:    #b86e10;
   --on-accent: #faf8ec;
   --border:    rgba(30,26,14,.12);
   --border2:   rgba(30,26,14,.18);
