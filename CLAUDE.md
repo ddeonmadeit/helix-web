@@ -118,7 +118,7 @@ sites/[slug]/
 
 **Nav:**
 - Fixed, `height: 64px`, `background: color-mix(in srgb, var(--bg) 88%, transparent)`, `backdrop-filter: blur(10px)`, `border-bottom: 1px solid var(--border)`
-- Brand mark: company initials in Barlow Condensed 700 + accent dot (`7px × 7px border-radius: 50%`)
+- Brand: business name only in Barlow Condensed 700 uppercase — **no initials monogram, no accent dot pill/mark.** Just `<span class="brand__name">Business Name</span>` inside the `.brand` anchor.
 - Nav links: underline-slide animation — `::after { content:""; position:absolute; left:0; right:100%; bottom:0; height:1px; background:var(--accent); transition: right .3s }` → `:hover::after { right: 0 }`
 - Nav CTA pill button: `border-radius: 999px; background: var(--accent); color: #0e1410; font-size: 12px; font-weight: 700; letter-spacing: .18em; text-transform: uppercase; padding: 10px 22px`
 
