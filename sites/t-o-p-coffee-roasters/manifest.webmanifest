@@ -1,0 +1,13 @@
+{
+  "name": "T.O.P Coffee Roasters",
+  "short_name": "T.O.P Roasters",
+  "start_url": "/sites/t-o-p-coffee-roasters/",
+  "display": "standalone",
+  "background_color": "#140d08",
+  "theme_color": "#cc6b2c",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
