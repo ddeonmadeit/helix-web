@@ -37,12 +37,12 @@ ul { list-style: none }
 
 /* ── Typography ── */
 .display {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
-  letter-spacing: .005em;
-  line-height: 1.02;
+  letter-spacing: -.01em;
+  line-height: 1.08;
 }
-.acc { color: var(--accent); font-style: italic }
+.acc { color: var(--accent) }
 
 .kicker, .eyebrow {
   display: inline-flex;
@@ -97,7 +97,7 @@ ul { list-style: none }
 }
 .brand { display: flex; align-items: center; flex-shrink: 0 }
 .brand__name {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
   font-size: 23px;
   letter-spacing: .02em;
@@ -216,7 +216,7 @@ ul { list-style: none }
 .hero__h1 {
   font-size: clamp(3.5rem, 8vw, 6.5rem);
   font-weight: 700;
-  -webkit-text-stroke: 1.5px currentColor;
+  -webkit-text-stroke: 0.5px currentColor;
   paint-order: stroke fill;
   margin-bottom: 24px;
   max-width: 13ch;
@@ -243,7 +243,7 @@ ul { list-style: none }
 }
 .hstat:last-child { border-right: none; margin-right: 0 }
 .hstat__val {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
   font-size: 27px;
   letter-spacing: .01em;
@@ -284,9 +284,8 @@ ul { list-style: none }
 }
 .svc-row:hover::before { right: -4px }
 .svc-num {
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
-  font-style: italic;
   font-size: clamp(40px, 5vw, 52px);
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 28%, transparent);
@@ -319,9 +318,8 @@ ul { list-style: none }
 .step:hover::after { transform: scaleX(1) }
 .step-num {
   display: block;
-  font-family: 'Cormorant Garamond', serif;
+  font-family: 'Fredoka', sans-serif;
   font-weight: 700;
-  font-style: italic;
   font-size: 46px;
   color: var(--accent);
   line-height: 1;
