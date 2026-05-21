@@ -204,21 +204,6 @@ ul { list-style: none }
   background: radial-gradient(circle, color-mix(in srgb,var(--accent) 20%,transparent) 0%, transparent 62%);
   pointer-events: none;
 }
-.hero__ghost {
-  position: absolute;
-  right: -2%;
-  top: 50%;
-  transform: translateY(-50%);
-  font-family: 'Cormorant Garamond', serif;
-  font-weight: 700;
-  font-style: italic;
-  font-size: clamp(8rem, 26vw, 22rem);
-  letter-spacing: .01em;
-  color: color-mix(in srgb, var(--accent) 8%, transparent);
-  white-space: nowrap;
-  pointer-events: none;
-  line-height: 1;
-}
 .hero__inner {
   position: relative;
   z-index: 1;
@@ -230,6 +215,9 @@ ul { list-style: none }
 .eyebrow { margin-bottom: 22px }
 .hero__h1 {
   font-size: clamp(3.5rem, 8vw, 6.5rem);
+  font-weight: 700;
+  -webkit-text-stroke: 1.5px currentColor;
+  paint-order: stroke fill;
   margin-bottom: 24px;
   max-width: 13ch;
 }
