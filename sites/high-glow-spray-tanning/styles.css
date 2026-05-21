@@ -38,8 +38,8 @@ ul { list-style: none }
 /* ── Typography ── */
 .display {
   font-family: 'Figtree', sans-serif;
-  font-weight: 600;
-  letter-spacing: -.01em;
+  font-weight: 800;
+  letter-spacing: -.02em;
   line-height: 1.08;
 }
 .acc { color: var(--accent) }
@@ -98,7 +98,7 @@ ul { list-style: none }
 .brand { display: flex; align-items: center; flex-shrink: 0 }
 .brand__name {
   font-family: 'Figtree', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 23px;
   letter-spacing: .02em;
   color: var(--text);
@@ -215,7 +215,7 @@ ul { list-style: none }
 .eyebrow { margin-bottom: 22px }
 .hero__h1 {
   font-size: clamp(3.5rem, 8vw, 6.5rem);
-  font-weight: 700;
+  font-weight: 900;
   margin-bottom: 24px;
   max-width: 13ch;
 }
@@ -242,7 +242,7 @@ ul { list-style: none }
 .hstat:last-child { border-right: none; margin-right: 0 }
 .hstat__val {
   font-family: 'Figtree', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 27px;
   letter-spacing: .01em;
   color: var(--accent);
@@ -283,7 +283,7 @@ ul { list-style: none }
 .svc-row:hover::before { right: -4px }
 .svc-num {
   font-family: 'Figtree', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: clamp(40px, 5vw, 52px);
   line-height: 1;
   color: color-mix(in srgb, var(--accent) 28%, transparent);
@@ -317,7 +317,7 @@ ul { list-style: none }
 .step-num {
   display: block;
   font-family: 'Figtree', sans-serif;
-  font-weight: 700;
+  font-weight: 800;
   font-size: 46px;
   color: var(--accent);
   line-height: 1;
