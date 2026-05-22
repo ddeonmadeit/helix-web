@@ -17,8 +17,9 @@ paint/scratch correction work, and accommodating last-minute bookings.
 - **Palette:** bright cyan `#21b6d2` · near-black `#0c0f11` · text `#e9eef0`
 - **Light theme:** cool off-white `#eef3f4`, accent `#0d7e94`
 - **Fonts:** Barlow Condensed 700 + Inter (house default for trades)
-- **Hero:** type-led — the Google listing had no photos, so the hero is
-  dot-grid + cyan radial glow + a large "DAVECO" ghost word.
+- **Hero:** Unsplash stock photo — shiny black BMW under studio lights
+  (Rana Singh, unsplash.com/photos/…5yCrrKZYG0Q). Google listing had no
+  photos; stock used clean per the always-use-a-hero-photo rule.
 - Cyan accent chosen to read clean/automotive/gloss and to differentiate from
   the run of warm-toned sites in this batch.
 - Sections: Hero → Ticker → Services (6) → Process

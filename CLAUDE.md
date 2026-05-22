@@ -68,11 +68,13 @@ Name · phone · address · services · hours · real testimonials/credentials �
 1. Their own website
 2. Google Maps owner photos (scraper output)
 3. Public Facebook / Instagram
-4. Unsplash — industry-specific terms (`timber deck merbau`, `commercial kitchen interior`, `concrete pour`). Never generic ("happy team", "business meeting"). **Don't guess `images.unsplash.com/photo-<ID>` URLs** — new-format IDs (e.g. `NcFBGQBiRDo`) won't resolve. WebFetch the Unsplash photo page first, extract the real CDN URL from `<meta property="og:image">`, then curl it.
+4. Unsplash — industry-specific terms (`timber deck merbau`, `commercial kitchen interior`, `concrete pour`). Never generic ("happy team", "business meeting"). **Don't guess `images.unsplash.com/photo-<ID>` URLs** — new-format IDs (e.g. `NcFBGQBiRDo`) won't resolve. WebFetch the Unsplash photo page first, extract the real CDN URL from any `images.unsplash.com/photo-` URL in the page, then curl it.
 
 Never hotlink. Never generate images. Never source from Google Image Search.
 
-**Placeholder rule:** If a design slot needs a photo and none exists, download an industry Unsplash image and stamp `PLACEHOLDER` in large semi-transparent capitals using Pillow. List in SOURCES.md + brief.md. Never silently swap stock for real.
+**The hero always has a photo.** When no real photo is available from sources 1–3, always source an industry Unsplash photo for the hero — choose a clean, minimal, professional shot that matches the business category. Use it clean (no watermark). Type-led is a last resort only when Unsplash also fails or returns wrong/unusable content.
+
+**Stock photo rule:** Always list every Unsplash image in SOURCES.md and brief.md with the Unsplash URL and photographer noted. Never silently substitute stock for a real business photo without noting it.
 
 ### Logo and palette
 
@@ -182,7 +184,7 @@ sites/[slug]/
 2. `::after` — radial glow ~70vw, `top: 45%; left: 28%`, 12–15% accent → transparent at 65%
 3. `.hero__ghost` — giant brand mark (initials, monogram, or category SVG outline) in Bebas Neue at `clamp(7rem, 22vw, 18rem)`, 3–4% accent, `position: absolute; right: -4%; top: 50%; transform: translateY(-50%); white-space: nowrap`
 
-Trigger when the only photo is logo-on-white, <50KB, wrong subject, or actively bad. Don't keep hunting Unsplash.
+Trigger only when no real photo exists AND Unsplash sourcing also fails (wrong subject, <50KB download, or unusable content). Otherwise always use a photo hero — even clean stock.
 
 **Buttons — always symmetrical, slightly rounded corners (`border-radius: 4px–6px`). Never use `clip-path` parallelogram styling** — it looks broken on screens and breaks the ghost button pairing. Primary button: solid accent fill, white text. Ghost button: transparent with `border: 1px solid`. Both `min-height: 48px`.
 
