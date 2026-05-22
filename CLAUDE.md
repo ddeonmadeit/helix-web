@@ -212,16 +212,43 @@ Write `index.html`, `styles.css`, `script.js` as three parallel Write calls. Ico
 - No invented facts, services, credentials, or testimonials
 - No wrong or unverified images (caught in Phase 1 size check + spot reads)
 - Both dark and light themes render correctly
-- **Mobile checklist — verify in CSS, no extra tool calls:**
-  - `.hero` has `padding-top: 64px` (nav height clearance)
-  - Hero h1 uses `clamp(64px, 13vw, 170px)` — never a bare `rem` or `px` value
-  - Sticky bottom bar present, hidden at `min-width: 640px`, uses `env(safe-area-inset-bottom)`
-  - All phone numbers are `href="tel:..."` links
-  - All below-fold images have `loading="lazy"`
-  - No element wider than `100vw` — no fixed `px` widths that could overflow at 320px
-  - Tap targets (buttons, links) use `min-height: 48px` or `padding` that achieves ≥ 44px
 
 Fix anything that fails, then commit.
+
+---
+
+## Phase 4.5 — Mobile QA (mandatory, runs before every commit)
+
+Every site must be fully optimised for mobile. Verify each item in CSS/HTML before committing — no extra tool calls, just read your own output mentally.
+
+**Layout & overflow**
+- [ ] No element wider than `100vw` — no fixed `px` widths that break at 320px
+- [ ] `.wrap` uses `padding: 0 var(--px)` with `--px: clamp(20px, 5vw, 64px)` — never fixed side padding
+- [ ] Hero never overflows horizontally — hero h1 uses `clamp(64px, 13vw, 170px)`, never bare `rem`/`px`
+- [ ] `.hero` has `padding-top: 64px` (clears fixed nav)
+- [ ] `.hero__btns` stacks to `flex-direction: column` at ≤ 540px; buttons go full-width
+- [ ] Services grid, process grid, and CTA all reflow correctly at 375px
+
+**Nav & action bar**
+- [ ] `.nav__links` hidden at ≤ 720px (`display: none`)
+- [ ] Mobile action bar present — `position: fixed; left: 12px; right: 12px; bottom: calc(12px + env(safe-area-inset-bottom)); border-radius: 999px`
+- [ ] Action bar hidden on desktop (`display: none` → `display: block` at ≤ 720px)
+
+**Touch & accessibility**
+- [ ] All tap targets (buttons, nav links, CTA) use `min-height: 48px` or padding achieving ≥ 44px
+- [ ] All phone numbers are `href="tel:..."` — never plain text
+- [ ] Body font-size ≥ 16px (prevents iOS auto-zoom on input focus)
+- [ ] Body copy ≥ 15px — readable without pinch-zoom
+
+**Images & performance**
+- [ ] Hero image `fetchpriority="high"`, no `loading="lazy"` on it
+- [ ] All below-fold images have `loading="lazy"`
+- [ ] Hero < 300KB; other images < 150KB
+- [ ] `<meta name="viewport" content="width=device-width, initial-scale=1">` present
+
+**Safe areas**
+- [ ] Action bar uses `env(safe-area-inset-bottom)` for notch/home-bar devices
+- [ ] No content clipped under iOS status bar
 
 ---
 
