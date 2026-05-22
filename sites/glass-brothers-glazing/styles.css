@@ -42,7 +42,7 @@ ul { list-style: none }
   --on-accent: #eef2f6;
   --border:    rgba(15,23,32,.12);
   --border2:   rgba(15,23,32,.18);
-  --imgf:      brightness(.88) saturate(.96);
+  --imgf:      brightness(.92) saturate(1);
   --veil:
     linear-gradient(90deg,
       color-mix(in srgb,var(--bg) 90%,transparent) 0%,

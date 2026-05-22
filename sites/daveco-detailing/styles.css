@@ -20,6 +20,15 @@ ul { list-style: none }
   --border2:   rgba(233,238,240,.16);
   --maxw:      1280px;
   --px:        clamp(20px, 5vw, 64px);
+  --imgf:      brightness(.72) saturate(.9);
+  --veil:
+    linear-gradient(90deg,
+      color-mix(in srgb,var(--bg) 88%,transparent) 0%,
+      color-mix(in srgb,var(--bg) 55%,transparent) 44%,
+      transparent 70%),
+    linear-gradient(0deg,
+      color-mix(in srgb,var(--bg) 90%,transparent) 0%,
+      transparent 52%);
 }
 
 [data-theme="light"] {
@@ -33,6 +42,7 @@ ul { list-style: none }
   --on-accent: #eef3f4;
   --border:    rgba(12,20,22,.12);
   --border2:   rgba(12,20,22,.18);
+  --imgf:      brightness(.88) saturate(.96);
 }
 
 /* ── Typography ── */
@@ -178,21 +188,7 @@ ul { list-style: none }
 }
 .btn--ghost:hover { border-color: var(--accent); color: var(--accent) }
 
-/* ── Hero (photo) ── */
-:root {
-  --imgf: brightness(.72) saturate(.9);
-  --veil:
-    linear-gradient(90deg,
-      color-mix(in srgb,var(--bg) 88%,transparent) 0%,
-      color-mix(in srgb,var(--bg) 55%,transparent) 44%,
-      transparent 70%),
-    linear-gradient(0deg,
-      color-mix(in srgb,var(--bg) 90%,transparent) 0%,
-      transparent 52%);
-}
-[data-theme="light"] {
-  --imgf: brightness(.88) saturate(.96);
-}
+/* ── Hero ── */
 .hero {
   position: relative;
   min-height: 100svh;
