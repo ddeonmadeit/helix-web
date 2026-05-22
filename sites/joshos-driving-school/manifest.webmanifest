@@ -1,0 +1,13 @@
+{
+  "name": "Josho's Driving School",
+  "short_name": "Josho's",
+  "start_url": "/sites/joshos-driving-school/",
+  "display": "standalone",
+  "background_color": "#0f1110",
+  "theme_color": "#83c61e",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
