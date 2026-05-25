@@ -1,9 +1,8 @@
 (function () {
   var PRODUCTS = [
-    { id: 1, name: 'Natural Treat Pack', img: 'images/product-treats.jpg' },
-    { id: 2, name: 'Raw Meat Bundle', img: 'images/product-raw.jpg' },
-    { id: 3, name: 'Chews & Bones', img: 'images/product-chews.jpg' },
-    { id: 4, name: 'Enrichment Toy Set', img: 'images/product-toys.jpg' }
+    { id: 1, name: 'Chews & Bones', img: 'images/product-chews.jpg' },
+    { id: 2, name: 'Enrichment Toy Set', img: 'images/product-toys.jpg' },
+    { id: 3, name: 'Raw Bones Pack', img: 'images/product-bones.jpg' }
   ];
 
   // Theme

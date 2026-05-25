@@ -389,12 +389,16 @@ body {
 
 .product-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 28px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
 }
 
-@media (max-width: 760px) {
-  .product-grid { grid-template-columns: 1fr; gap: 20px }
+@media (max-width: 900px) {
+  .product-grid { grid-template-columns: repeat(2, 1fr) }
+}
+
+@media (max-width: 560px) {
+  .product-grid { grid-template-columns: 1fr; gap: 16px }
 }
 
 .product-card {
@@ -437,6 +441,40 @@ body {
   text-transform: uppercase;
   padding: 5px 12px;
   border-radius: 999px;
+}
+
+.product-card__watermark {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.product-card__watermark::before {
+  content: attr(aria-hidden);
+  display: none;
+}
+
+.product-card__watermark::after {
+  content: 'PLACEHOLDER';
+  font-family: 'Barlow Condensed', sans-serif;
+  font-weight: 700;
+  font-size: clamp(13px, 2vw, 18px);
+  letter-spacing: .28em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,.82);
+  text-shadow: 0 1px 6px rgba(0,0,0,.55);
+  transform: rotate(-28deg);
+  white-space: nowrap;
+  border: 1.5px solid rgba(255,255,255,.55);
+  padding: 5px 14px;
+  border-radius: 3px;
+  background: rgba(0,0,0,.18);
+  backdrop-filter: blur(1px);
 }
 
 .product-card__body { padding: 24px }
@@ -928,9 +966,8 @@ body {
 }
 .reveal.is-in { opacity: 1; transform: none }
 
-.product-card.reveal:nth-child(2) { transition-delay: .08s }
-.product-card.reveal:nth-child(3) { transition-delay: .16s }
-.product-card.reveal:nth-child(4) { transition-delay: .24s }
+.product-card.reveal:nth-child(2) { transition-delay: .1s }
+.product-card.reveal:nth-child(3) { transition-delay: .2s }
 
 @media (prefers-reduced-motion: reduce) {
   .reveal { transition: none !important; opacity: 1 !important; transform: none !important }
