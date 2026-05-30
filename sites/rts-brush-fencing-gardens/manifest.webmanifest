@@ -1,0 +1,13 @@
+{
+  "name": "RT's Brush Fencing & Gardens",
+  "short_name": "RT's Fencing",
+  "start_url": "/sites/rts-brush-fencing-gardens/",
+  "display": "standalone",
+  "background_color": "#151210",
+  "theme_color": "#b87d2e",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
