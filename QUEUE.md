@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-9. **bartlettair** · Cardiff
-   Air conditioning contractor · 📞 +61490133142 · 📍 Currans Rd, Cooranbong NSW 2265, Australia
-   https://www.google.com/maps/search/?api=1&query=bartlettair%20Cardiff
-
 10. **Hulk Barber Shop** · Kenwick
    Hairdressers · 📞 +61497982311 · 📍 69 Belmont Rd, Kenwick WA 6107, Australia
    https://www.google.com/maps/search/?api=1&query=Hulk%20Barber%20Shop%20Kenwick
