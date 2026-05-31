@@ -77,25 +77,27 @@ if (!queue.length) {
 const lines = [
   `# Site Build Queue — ${queue.length} leads`,
   '',
-  'Build each site below using the CLAUDE.md workflow. For each one:',
-  '- Use the business name, phone, location and industry provided',
-  '- Follow the full CLAUDE.md design system',
-  '- Commit and push when done',
-  '- Move to the next',
+  'For each entry below: open the Google Maps link, then run the normal "new website" workflow.',
+  'Build, commit and push, then move to the next.',
   '',
   '---',
   '',
 ];
 
 queue.forEach((lead, i) => {
-  const parts = [`**${lead.businessName}**`];
-  if (lead.location) parts.push(lead.location);
-  if (lead.category || lead.industry) parts.push(lead.category || lead.industry);
-  parts.push(`📞 ${lead.phone}`);
-  if (lead.address) parts.push(`📍 ${lead.address}`);
-  if (lead.rating) parts.push(`⭐ ${lead.rating}${lead.reviewCount ? ` (${lead.reviewCount} reviews)` : ''}`);
+  // Build a specific Maps search URL from name + location
+  const query = encodeURIComponent(`${lead.businessName} ${lead.location || ''}`.trim());
+  const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${query}`;
 
-  lines.push(`${i + 1}. ${parts.join(' · ')}`);
+  const meta = [];
+  if (lead.category || lead.industry) meta.push(lead.category || lead.industry);
+  if (lead.phone) meta.push(`📞 ${lead.phone}`);
+  if (lead.address) meta.push(`📍 ${lead.address}`);
+
+  lines.push(`${i + 1}. **${lead.businessName}** · ${lead.location || ''}`);
+  if (meta.length) lines.push(`   ${meta.join(' · ')}`);
+  lines.push(`   ${mapsUrl}`);
+  lines.push('');
 });
 
 const queuePath = path.join(REPO_DIR, 'QUEUE.md');
