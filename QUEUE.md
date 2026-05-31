@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-7. **Top Secret for Hair** · Kenwick
-   Hairdressers · 📞 +61894595548 · 📍 1/13 Blackburn St, Maddington WA 6109, Australia
-   https://www.google.com/maps/search/?api=1&query=Top%20Secret%20for%20Hair%20Kenwick
-
 8. **Yumi Beauty** · Kenwick
    Hairdressers · 📞 +61433595474 · 📍 4 Weero Cl, Kenwick WA 6107, Australia
    https://www.google.com/maps/search/?api=1&query=Yumi%20Beauty%20Kenwick
