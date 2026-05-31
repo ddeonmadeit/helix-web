@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-1. **NEW DIVINE HAIR N BEAUTY SALON** · Kenwick
-   Hairdressers · 📞 +61862904115 · 📍 4/2223 Albany Hwy, Gosnells WA 6110, Australia
-   https://www.google.com/maps/search/?api=1&query=NEW%20DIVINE%20HAIR%20N%20BEAUTY%20SALON%20Kenwick
-
 2. **Static Hair Design** · Kenwick
    Hairdressers · 📞 +61894517230 · 📍 8 Wickham Rd, Beckenham WA 6107, Australia
    https://www.google.com/maps/search/?api=1&query=Static%20Hair%20Design%20Kenwick
