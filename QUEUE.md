@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-17. **South West Roof Painters** · Bunbury
-   Roofers · 📞 +61897252525 · 📍 3 Zaknic Pl, East Bunbury WA 6230, Australia
-   https://www.google.com/maps/search/?api=1&query=South%20West%20Roof%20Painters%20Bunbury
-
 18. **Warrnambool Pro-Clean** · Warrnambool
    Cleaners · 📞 +61409256626 · 📍 1 Eliza Ct, Warrnambool VIC 3280, Australia
    https://www.google.com/maps/search/?api=1&query=Warrnambool%20Pro-Clean%20Warrnambool
