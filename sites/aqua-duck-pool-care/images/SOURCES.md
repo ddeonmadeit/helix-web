@@ -1,0 +1,6 @@
+# Image Sources — Aqua Duck Pool Care
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | restaurant1.jpg |
+| icon-*.png | Generated (Pillow) | AQ monogram |
