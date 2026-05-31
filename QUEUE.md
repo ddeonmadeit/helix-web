@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-2. **Static Hair Design** · Kenwick
-   Hairdressers · 📞 +61894517230 · 📍 8 Wickham Rd, Beckenham WA 6107, Australia
-   https://www.google.com/maps/search/?api=1&query=Static%20Hair%20Design%20Kenwick
-
 3. **996 Business & Tax** · Newnham TAS
    Accountants · 📞 +61418130375 · 📍 Riverbank Pl, Riverside TAS 7250, Australia
    https://www.google.com/maps/search/?api=1&query=996%20Business%20%26%20Tax%20Newnham%20TAS
