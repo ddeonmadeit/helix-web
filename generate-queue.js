@@ -16,13 +16,14 @@ const fs   = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const REPO_DIR    = path.resolve(__dirname);
-const SITES_DIR   = path.join(REPO_DIR, 'sites');
-const VPS         = 'root@187.77.184.36';
-const SSH_KEY     = '/Users/juna/.ssh/helix_fresh';
-const VPS_DB      = '/opt/helix-website-scraper/output/leads-db.json';
-const VPS_PIPELINE = '/opt/helix-sms/data/pipeline.json';
-const COUNT       = parseInt(process.argv.find(a => a.startsWith('--count='))?.split('=')[1] ?? '20');
+const REPO_DIR        = path.resolve(__dirname);
+const SITES_DIR       = path.join(REPO_DIR, 'sites');
+const VPS             = 'root@187.77.184.36';
+const SSH_KEY         = '/Users/juna/.ssh/helix_fresh';
+const VPS_DB          = '/opt/helix-website-scraper/output/leads-db.json';
+const VPS_PIPELINE    = '/opt/helix-sms/data/pipeline.json';
+const QUEUED_FILE     = path.join(REPO_DIR, 'queued-phones.json');
+const COUNT           = parseInt(process.argv.find(a => a.startsWith('--count='))?.split('=')[1] ?? '20');
 
 function slugify(name, location) {
   return (name + ' ' + (location || ''))
@@ -89,6 +90,14 @@ try {
   console.log(`Already deployed: ${deployedPhones.size} phones — skipping these`);
 } catch {}
 
+// Load queued-phones.json — phones already queued but not yet built (prevents re-queuing mid-build)
+const queuedPhones = new Set();
+try {
+  const arr = JSON.parse(fs.readFileSync(QUEUED_FILE, 'utf8'));
+  for (const p of arr) queuedPhones.add(p);
+  console.log(`Already queued (pending build): ${queuedPhones.size} phones — skipping these`);
+} catch {}
+
 // Build queue — skip already-built, skip no-phone
 const queue = [];
 const seenSlugs = new Set(builtSlugs);
@@ -105,6 +114,9 @@ for (const lead of leads) {
 
   // Skip if already deployed (phone match — git-state-independent)
   if (deployedPhones.has(phoneDigits)) continue;
+
+  // Skip if already queued but not yet built
+  if (queuedPhones.has(phoneDigits)) continue;
 
   // Skip leads already in CRM pipeline (any stage, including not_interested)
   if (pipelinePhones.has(phoneDigits)) continue;
@@ -151,6 +163,11 @@ queue.forEach((lead, i) => {
 
 const queuePath = path.join(REPO_DIR, 'QUEUE.md');
 fs.writeFileSync(queuePath, lines.join('\n') + '\n');
+
+// Persist queued phones so next run won't re-queue them before they're built
+const allQueued = new Set([...queuedPhones, ...queue.map(l => l.phone.replace(/\D/g, ''))]);
+fs.writeFileSync(QUEUED_FILE, JSON.stringify([...allQueued], null, 2));
+console.log(`Saved ${allQueued.size} total queued phones to queued-phones.json`);
 
 console.log(`\nWrote ${queue.length} leads to QUEUE.md`);
 console.log('Now tell your Claude session: "build all sites in QUEUE.md one by one"');
