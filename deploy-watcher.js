@@ -65,9 +65,10 @@ function parseBrief(briefPath) {
   if (!fs.existsSync(briefPath)) return { name: null, phone: null };
   const text = fs.readFileSync(briefPath, 'utf8');
 
-  // Name: first H1
-  const nameMatch = text.match(/^#\s+Brief\s+[—-]+\s+(.+)$/m);
-  const name = nameMatch ? nameMatch[1].trim() : null;
+  // Name: prefer **Business:** field, fall back to H1 (handles both old and new brief formats)
+  const bizMatch = text.match(/^\*\*Business:\*\*\s*(.+)$/m);
+  const nameMatch = !bizMatch && text.match(/^#\s+(.+?)\s+[—-]/m);
+  const name = bizMatch ? bizMatch[1].trim() : (nameMatch ? nameMatch[1].trim() : null);
 
   // Phone — handles both: "**Phone:** +61..." and "Phone: **0435...**"
   const phoneMatch = text.match(/phone[^\n+\d]*([+\d][\d\s()\-]{5,18})/i);
@@ -119,7 +120,7 @@ function loadTemplate() {
 
 // ── Append to personalised-leads.csv ─────────────────────────────────────────
 function appendToSmsQueue(businessName, phone, url, pipelinePhones) {
-  if (!businessName || !phone) return;
+  if (!phone) return;
 
   // Skip if this lead is already in the CRM pipeline
   const normalised = phone.replace(/\D/g, '');

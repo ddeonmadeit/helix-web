@@ -64,6 +64,16 @@ const builtSlugs = new Set(
   fs.readdirSync(SITES_DIR).filter(s => fs.statSync(path.join(SITES_DIR, s)).isDirectory())
 );
 
+// Load deployed.json — definitive record of every built phone (git-state-independent)
+const deployedPhones = new Set();
+try {
+  const deployed = JSON.parse(fs.readFileSync(path.join(REPO_DIR, 'deployed.json'), 'utf8'));
+  for (const data of Object.values(deployed)) {
+    if (data.phone) deployedPhones.add(data.phone.replace(/\D/g, ''));
+  }
+  console.log(`Already deployed: ${deployedPhones.size} phones — skipping these`);
+} catch {}
+
 // Build queue — skip already-built, skip no-phone
 const queue = [];
 const seenSlugs = new Set(builtSlugs);
@@ -76,8 +86,13 @@ for (const lead of leads) {
   const phone = lead.phone.replace(/\s/g, '');
   if (seenPhones.has(phone)) continue;
 
+  const phoneDigits = phone.replace(/\D/g, '');
+
+  // Skip if already deployed (phone match — git-state-independent)
+  if (deployedPhones.has(phoneDigits)) continue;
+
   // Skip leads already in CRM pipeline (any stage, including not_interested)
-  if (pipelinePhones.has(phone.replace(/\D/g, ''))) continue;
+  if (pipelinePhones.has(phoneDigits)) continue;
 
   const slug = slugify(lead.businessName || '', lead.location || '');
   if (!slug || seenSlugs.has(slug)) continue;
