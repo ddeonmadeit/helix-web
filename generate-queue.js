@@ -25,6 +25,16 @@ const VPS_PIPELINE    = '/opt/helix-sms/data/pipeline.json';
 const QUEUED_FILE     = path.join(REPO_DIR, 'queued-phones.json');
 const COUNT           = parseInt(process.argv.find(a => a.startsWith('--count='))?.split('=')[1] ?? '20');
 
+function isAuMobile(phone) {
+  if (!phone) return false;
+  const digits = phone.replace(/\D/g, '');
+  // Normalise to 04xx
+  let mobile = digits;
+  if (digits.startsWith('614')) mobile = '0' + digits.slice(2);
+  else if (digits.startsWith('61')) mobile = '0' + digits.slice(2);
+  return /^04\d{8}$/.test(mobile);
+}
+
 function slugify(name, location) {
   return (name + ' ' + (location || ''))
     .toLowerCase()
@@ -108,6 +118,7 @@ for (const lead of leads) {
   if (!lead.phone) continue;
 
   const phone = lead.phone.replace(/\s/g, '');
+  if (!isAuMobile(phone)) continue;  // skip landlines, 1300s, international
   if (seenPhones.has(phone)) continue;
 
   const phoneDigits = phone.replace(/\D/g, '');

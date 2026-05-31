@@ -94,6 +94,14 @@ function toAuMobile(phone) {
   return digits;
 }
 
+// ── Check if a phone is an Australian mobile ─────────────────────────────────
+function isAuMobile(phone) {
+  if (!phone) return false;
+  const mobile = toAuMobile(phone);
+  // Must be exactly 10 digits and start with 04
+  return /^04\d{8}$/.test(mobile);
+}
+
 // ── Load CRM pipeline phones (skip already-contacted leads) ──────────────────
 function loadPipelinePhones() {
   try {
@@ -121,6 +129,10 @@ function loadTemplate() {
 // ── Append to personalised-leads.csv ─────────────────────────────────────────
 function appendToSmsQueue(businessName, phone, url, pipelinePhones) {
   if (!phone) return;
+  if (!isAuMobile(phone)) {
+    log(`  ⏭  Skipping SMS (not a mobile number): ${phone}`);
+    return;
+  }
 
   // Skip if this lead is already in the CRM pipeline
   const normalised = phone.replace(/\D/g, '');
