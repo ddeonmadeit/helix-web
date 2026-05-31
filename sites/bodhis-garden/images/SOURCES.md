@@ -1,0 +1,6 @@
+# Image Sources — Bodhi's Garden
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | restaurant1.jpg |
+| icon-*.png | Generated (Pillow) | BO monogram |

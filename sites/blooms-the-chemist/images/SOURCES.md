@@ -1,0 +1,6 @@
+# Image Sources — Blooms The Chemist
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | restaurant1.jpg |
+| icon-*.png | Generated (Pillow) | BL monogram |
