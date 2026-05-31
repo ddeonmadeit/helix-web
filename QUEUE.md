@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-14. **Graham's Cleaning Supplies** · Warrnambool
-   Cleaners · 📞 +61355613800 · 📍 Ozone Carpark, 34/38 Kepler St, Warrnambool VIC 3280, Australia
-   https://www.google.com/maps/search/?api=1&query=Graham's%20Cleaning%20Supplies%20Warrnambool
-
 15. **Ford Air Conditioning** · Cardiff
    HVAC · 📞 +61439865395 · 📍 2b/49 Pendlebury Rd, Cardiff NSW 2285, Australia
    https://www.google.com/maps/search/?api=1&query=Ford%20Air%20Conditioning%20Cardiff
