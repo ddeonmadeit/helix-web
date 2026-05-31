@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-16. **Warrnambool Laundrette - Lava Street** · Warrnambool
-   Cleaners · 📞 +61408532521 · 📍 221 Lava St, Warrnambool VIC 3280, Australia
-   https://www.google.com/maps/search/?api=1&query=Warrnambool%20Laundrette%20-%20Lava%20Street%20Warrnambool
-
 17. **South West Roof Painters** · Bunbury
    Roofers · 📞 +61897252525 · 📍 3 Zaknic Pl, East Bunbury WA 6230, Australia
    https://www.google.com/maps/search/?api=1&query=South%20West%20Roof%20Painters%20Bunbury
