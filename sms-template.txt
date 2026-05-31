@@ -1,1 +1,3 @@
-Hey {businessName}, I noticed you didn't have a website so I built you one for free — have a look: {url}
+Hey, I noticed you didn't have website for your business, so I went ahead and built you one.
+{url}
+Happy to make any changes if needed to get this live

@@ -34,9 +34,11 @@ const SITES_DIR     = path.join(REPO_DIR, 'sites');
 const DEPLOYED_FILE  = path.join(REPO_DIR, 'deployed.json');
 const SMS_QUEUE      = path.join(REPO_DIR, 'personalised-leads.csv');
 const TEMPLATE_FILE  = path.join(REPO_DIR, 'sms-template.txt');
+const PIPELINE_FILE  = path.join(REPO_DIR, 'pipeline.json');
 const VPS           = 'root@187.77.184.36';
 const SSH_KEY       = '/Users/juna/.ssh/helix_fresh';
 const VPS_DEPLOY    = '/var/www/buildquote/public';
+const VPS_PIPELINE  = '/opt/helix-sms/data/pipeline.json';
 const LIVE_BASE     = 'https://helixsolution.au';
 const POLL_MS       = 5 * 60 * 1000; // 5 minutes
 const ONCE          = process.argv.includes('--once');
@@ -91,6 +93,24 @@ function toAuMobile(phone) {
   return digits;
 }
 
+// ── Load CRM pipeline phones (skip already-contacted leads) ──────────────────
+function loadPipelinePhones() {
+  try {
+    execSync(
+      `scp -i ${SSH_KEY} -o StrictHostKeyChecking=no ${VPS}:${VPS_PIPELINE} ${PIPELINE_FILE}`,
+      { encoding: 'utf8', stdio: 'pipe' }
+    );
+  } catch {}
+  try {
+    const data = JSON.parse(fs.readFileSync(PIPELINE_FILE, 'utf8'));
+    const phones = new Set(Object.keys(data).map(p => p.replace(/\D/g, '')));
+    log(`CRM pipeline: ${phones.size} leads excluded from SMS queue`);
+    return phones;
+  } catch {
+    return new Set();
+  }
+}
+
 // ── Load SMS template ─────────────────────────────────────────────────────────
 function loadTemplate() {
   if (!fs.existsSync(TEMPLATE_FILE)) return null;
@@ -98,8 +118,15 @@ function loadTemplate() {
 }
 
 // ── Append to personalised-leads.csv ─────────────────────────────────────────
-function appendToSmsQueue(businessName, phone, url) {
+function appendToSmsQueue(businessName, phone, url, pipelinePhones) {
   if (!businessName || !phone) return;
+
+  // Skip if this lead is already in the CRM pipeline
+  const normalised = phone.replace(/\D/g, '');
+  if (pipelinePhones && pipelinePhones.has(normalised)) {
+    log(`  ⏭  Skipping SMS (already in CRM pipeline): ${businessName}`);
+    return;
+  }
 
   const mobilePhone = toAuMobile(phone);
   const template = loadTemplate();
@@ -117,7 +144,7 @@ function appendToSmsQueue(businessName, phone, url) {
 }
 
 // ── Deploy one slug ────────────────────────────────────────────────────────────
-async function deploySite(slug) {
+async function deploySite(slug, pipelinePhones) {
   const siteDir  = path.join(SITES_DIR, slug);
   const briefPath = path.join(siteDir, 'brief.md');
   const liveUrl  = `${LIVE_BASE}/${slug}/`;
@@ -149,8 +176,8 @@ async function deploySite(slug) {
   if (res.status !== 200) throw new Error(`HTTP ${res.status}`);
   log(`  ✓ Live: ${liveUrl}`);
 
-  // Queue SMS
-  appendToSmsQueue(name, phone, liveUrl);
+  // Queue SMS (skips if phone is in CRM pipeline)
+  appendToSmsQueue(name, phone, liveUrl, pipelinePhones);
 
   return { name, phone, liveUrl };
 }
@@ -200,10 +227,13 @@ async function poll() {
 
   log(`Found ${newSlugs.length} site(s) to deploy: ${newSlugs.join(', ')}`);
 
+  // Load pipeline phones once per poll so we don't SCP for every site
+  const pipelinePhones = loadPipelinePhones();
+
   let deployed_count = 0, failed_count = 0;
   for (const slug of newSlugs) {
     try {
-      const result = await deploySite(slug);
+      const result = await deploySite(slug, pipelinePhones);
       const updatedDeployed = loadDeployed();
       updatedDeployed[slug] = {
         deployedAt: new Date().toISOString(),

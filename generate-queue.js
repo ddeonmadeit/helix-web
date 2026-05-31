@@ -16,12 +16,13 @@ const fs   = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const REPO_DIR  = path.resolve(__dirname);
-const SITES_DIR = path.join(REPO_DIR, 'sites');
-const VPS       = 'root@187.77.184.36';
-const SSH_KEY   = '/Users/juna/.ssh/helix_fresh';
-const VPS_DB    = '/opt/helix-website-scraper/output/leads-db.json';
-const COUNT     = parseInt(process.argv.find(a => a.startsWith('--count='))?.split('=')[1] ?? '20');
+const REPO_DIR    = path.resolve(__dirname);
+const SITES_DIR   = path.join(REPO_DIR, 'sites');
+const VPS         = 'root@187.77.184.36';
+const SSH_KEY     = '/Users/juna/.ssh/helix_fresh';
+const VPS_DB      = '/opt/helix-website-scraper/output/leads-db.json';
+const VPS_PIPELINE = '/opt/helix-sms/data/pipeline.json';
+const COUNT       = parseInt(process.argv.find(a => a.startsWith('--count='))?.split('=')[1] ?? '20');
 
 function slugify(name, location) {
   return (name + ' ' + (location || ''))
@@ -43,6 +44,21 @@ execSync(`scp -i ${SSH_KEY} -o StrictHostKeyChecking=no ${VPS}:${VPS_DB} ${local
 const leads = JSON.parse(fs.readFileSync(localDb, 'utf8'));
 console.log(`Got ${leads.length} leads`);
 
+// Sync CRM pipeline from VPS — skip anyone already contacted
+console.log('Syncing CRM pipeline from VPS...');
+const localPipeline = path.join(REPO_DIR, 'pipeline.json');
+const pipelinePhones = new Set();
+try {
+  execSync(`scp -i ${SSH_KEY} -o StrictHostKeyChecking=no ${VPS}:${VPS_PIPELINE} ${localPipeline}`, { stdio: 'pipe' });
+  const pipeline = JSON.parse(fs.readFileSync(localPipeline, 'utf8'));
+  for (const phone of Object.keys(pipeline)) {
+    pipelinePhones.add(phone.replace(/\D/g, '')); // normalise to digits only for comparison
+  }
+  console.log(`Skipping ${pipelinePhones.size} leads already in CRM pipeline`);
+} catch (e) {
+  console.warn('Could not sync pipeline.json — proceeding without CRM filter:', e.message);
+}
+
 // Find existing slugs in repo
 const builtSlugs = new Set(
   fs.readdirSync(SITES_DIR).filter(s => fs.statSync(path.join(SITES_DIR, s)).isDirectory())
@@ -59,6 +75,9 @@ for (const lead of leads) {
 
   const phone = lead.phone.replace(/\s/g, '');
   if (seenPhones.has(phone)) continue;
+
+  // Skip leads already in CRM pipeline (any stage, including not_interested)
+  if (pipelinePhones.has(phone.replace(/\D/g, ''))) continue;
 
   const slug = slugify(lead.businessName || '', lead.location || '');
   if (!slug || seenSlugs.has(slug)) continue;
