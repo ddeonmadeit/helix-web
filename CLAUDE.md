@@ -22,6 +22,8 @@ No Google Maps URL will be provided — use the business name + location + indus
 
 To refresh the queue with new leads, run: `node generate-queue.js --count=20`
 
+**Generator script limit:** When using a Python batch generator, process a maximum of **20 sites per script run** to avoid socket timeouts on large writes. Split larger queues into batches of 20, commit + push after each batch.
+
 ---
 
 ## Speed rules — read first
