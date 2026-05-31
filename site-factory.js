@@ -395,6 +395,11 @@ Call the deliver_site tool with all required files.`;
 
   // ── 6. Commit + push to GitHub ──────────────────────────────────────────────
   log(`  → Committing to GitHub...`);
+  // Set authenticated remote if GITHUB_TOKEN is available
+  const ghToken = process.env.GITHUB_TOKEN;
+  if (ghToken) {
+    exec(`git remote set-url origin https://${ghToken}@github.com/ddeonmadeit/helix-web.git`);
+  }
   exec(`git add sites/${finalSlug}/`);
   exec(`git commit -m "${finalSlug}: one-page site"`);
   exec(`git push -u origin ${BRANCH}`);
