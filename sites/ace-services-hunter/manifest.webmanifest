@@ -1,0 +1,13 @@
+{
+  "name": "ACE Services Hunter",
+  "short_name": "ACE Services Hunte",
+  "start_url": "/sites/ace-services-hunter/",
+  "display": "standalone",
+  "background_color": "#0f1115",
+  "theme_color": "#5d7488",
+  "icons": [
+    { "src": "images/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "images/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "images/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}

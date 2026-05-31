@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-11. **ACE Services Hunter** · Cardiff
-   HVAC · 📞 +61249487910
-   https://www.google.com/maps/search/?api=1&query=ACE%20Services%20Hunter%20Cardiff
-
 12. **Air Envy Air Conditioning** · Cardiff
    HVAC · 📞 +61422573854
    https://www.google.com/maps/search/?api=1&query=Air%20Envy%20Air%20Conditioning%20Cardiff
