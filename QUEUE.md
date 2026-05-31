@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-12. **Air Envy Air Conditioning** · Cardiff
-   HVAC · 📞 +61422573854
-   https://www.google.com/maps/search/?api=1&query=Air%20Envy%20Air%20Conditioning%20Cardiff
-
 13. **Billington's Window & Pressure Cleaning Service** · Warrnambool
    Cleaners · 📞 +61355622516 · 📍 8 Mountain Ash Dr, Warrnambool VIC 3280, Australia
    https://www.google.com/maps/search/?api=1&query=Billington's%20Window%20%26%20Pressure%20Cleaning%20Service%20Warrnambool
