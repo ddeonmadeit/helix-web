@@ -1,0 +1,1 @@
+Hey {businessName}, I noticed you didn't have a website so I built you one for free — have a look: {url}

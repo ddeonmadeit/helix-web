@@ -31,8 +31,9 @@ const fetch = require('node-fetch');
 // ── Config ────────────────────────────────────────────────────────────────────
 const REPO_DIR      = path.resolve(__dirname);
 const SITES_DIR     = path.join(REPO_DIR, 'sites');
-const DEPLOYED_FILE = path.join(REPO_DIR, 'deployed.json');
-const SMS_QUEUE     = path.join(REPO_DIR, 'sms-queue.csv');
+const DEPLOYED_FILE  = path.join(REPO_DIR, 'deployed.json');
+const SMS_QUEUE      = path.join(REPO_DIR, 'personalised-leads.csv');
+const TEMPLATE_FILE  = path.join(REPO_DIR, 'sms-template.txt');
 const VPS           = 'root@187.77.184.36';
 const SSH_KEY       = '/Users/juna/.ssh/helix_fresh';
 const VPS_DEPLOY    = '/var/www/buildquote/public';
@@ -80,14 +81,39 @@ function parseBrief(briefPath) {
   return { name, phone };
 }
 
-// ── Append to SMS CSV queue ───────────────────────────────────────────────────
+// ── Convert phone to 04xx format ─────────────────────────────────────────────
+function toAuMobile(phone) {
+  if (!phone) return null;
+  const digits = phone.replace(/\D/g, '');
+  if (digits.startsWith('614')) return '0' + digits.slice(2);   // +614... → 04...
+  if (digits.startsWith('61'))  return '0' + digits.slice(2);   // 61...   → 0...
+  if (digits.startsWith('04'))  return digits;                   // already 04xx
+  return digits;
+}
+
+// ── Load SMS template ─────────────────────────────────────────────────────────
+function loadTemplate() {
+  if (!fs.existsSync(TEMPLATE_FILE)) return null;
+  return fs.readFileSync(TEMPLATE_FILE, 'utf8').trim();
+}
+
+// ── Append to personalised-leads.csv ─────────────────────────────────────────
 function appendToSmsQueue(businessName, phone, url) {
   if (!businessName || !phone) return;
-  const header = 'businessName,phone,url\n';
-  const row = `"${(businessName || '').replace(/"/g, '""')}","${phone}","${url}"\n`;
+
+  const mobilePhone = toAuMobile(phone);
+  const template = loadTemplate();
+
+  // Build message — fill template if available, otherwise skip message column
+  const message = template
+    ? template.replace(/\{businessName\}/gi, businessName).replace(/\{url\}/gi, url)
+    : url;
+
+  const header = 'Phone,Message\n';
+  const row = `"${mobilePhone}","${message.replace(/"/g, '""')}"\n`;
   if (!fs.existsSync(SMS_QUEUE)) fs.writeFileSync(SMS_QUEUE, header);
   fs.appendFileSync(SMS_QUEUE, row);
-  log(`  📱 SMS queued: ${businessName} → ${phone}`);
+  log(`  📱 SMS queued: ${businessName} → ${mobilePhone}`);
 }
 
 // ── Deploy one slug ────────────────────────────────────────────────────────────
