@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-3. **996 Business & Tax** · Newnham TAS
-   Accountants · 📞 +61418130375 · 📍 Riverbank Pl, Riverside TAS 7250, Australia
-   https://www.google.com/maps/search/?api=1&query=996%20Business%20%26%20Tax%20Newnham%20TAS
-
 4. **Organic Hair and Healing Perth** · Kenwick
    Hair salon · 📞 +61411690390 · 📍 38 Jacqueline Dr, Thornlie WA 6108, Australia
    https://www.google.com/maps/search/?api=1&query=Organic%20Hair%20and%20Healing%20Perth%20Kenwick
