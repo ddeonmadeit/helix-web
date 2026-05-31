@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-5. **Dolled & Dapper Hair Lounge** · Kenwick
-   Hairdressers · 📞 +61894935009 · 📍 SHOP 2/2 Binley Pl, Maddington WA 6109, Australia
-   https://www.google.com/maps/search/?api=1&query=Dolled%20%26%20Dapper%20Hair%20Lounge%20Kenwick
-
 6. **MV Consulting** · Newnham TAS
    Accountants · 📞 +61363266276 · 📍 116 Alanvale Rd, Newnham TAS 7248, Australia
    https://www.google.com/maps/search/?api=1&query=MV%20Consulting%20Newnham%20TAS
