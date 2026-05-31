@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-8. **Yumi Beauty** · Kenwick
-   Hairdressers · 📞 +61433595474 · 📍 4 Weero Cl, Kenwick WA 6107, Australia
-   https://www.google.com/maps/search/?api=1&query=Yumi%20Beauty%20Kenwick
-
 9. **bartlettair** · Cardiff
    Air conditioning contractor · 📞 +61490133142 · 📍 Currans Rd, Cooranbong NSW 2265, Australia
    https://www.google.com/maps/search/?api=1&query=bartlettair%20Cardiff
