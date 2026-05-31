@@ -33,9 +33,11 @@ function slugify(name, location) {
     .slice(0, 60);
 }
 
-// Pull latest repo state so slug check is accurate
-console.log('Pulling latest repo...');
-try { execSync('git pull --ff-only', { cwd: REPO_DIR, stdio: 'pipe' }); } catch {}
+// Fetch latest from remote (works even with unstaged local changes, unlike git pull)
+console.log('Fetching from GitHub...');
+try { execSync('git fetch origin', { cwd: REPO_DIR, stdio: 'pipe' }); } catch (e) {
+  console.warn('git fetch failed:', e.message);
+}
 
 // Sync leads from VPS
 console.log('Syncing leads from VPS...');
@@ -59,10 +61,23 @@ try {
   console.warn('Could not sync pipeline.json — proceeding without CRM filter:', e.message);
 }
 
-// Find existing slugs in repo
-const builtSlugs = new Set(
+// Get built slugs from REMOTE (accurate even when local pull failed)
+const BRANCH = 'claude/one-page-website-designer-vpSDS';
+let remoteSlugs = new Set();
+try {
+  const out = execSync(`git ls-tree -d --name-only origin/${BRANCH} sites/`, { cwd: REPO_DIR, encoding: 'utf8' });
+  remoteSlugs = new Set(out.trim().split('\n').filter(Boolean));
+  console.log(`Remote has ${remoteSlugs.size} built sites`);
+} catch (e) {
+  console.warn('Could not read remote slugs:', e.message);
+}
+
+// Also include local slugs in case remote fetch failed
+const localSlugs = new Set(
   fs.readdirSync(SITES_DIR).filter(s => fs.statSync(path.join(SITES_DIR, s)).isDirectory())
 );
+
+const builtSlugs = new Set([...remoteSlugs, ...localSlugs]);
 
 // Load deployed.json — definitive record of every built phone (git-state-independent)
 const deployedPhones = new Set();
