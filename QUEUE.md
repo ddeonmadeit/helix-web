@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-4. **Organic Hair and Healing Perth** · Kenwick
-   Hair salon · 📞 +61411690390 · 📍 38 Jacqueline Dr, Thornlie WA 6108, Australia
-   https://www.google.com/maps/search/?api=1&query=Organic%20Hair%20and%20Healing%20Perth%20Kenwick
-
 5. **Dolled & Dapper Hair Lounge** · Kenwick
    Hairdressers · 📞 +61894935009 · 📍 SHOP 2/2 Binley Pl, Maddington WA 6109, Australia
    https://www.google.com/maps/search/?api=1&query=Dolled%20%26%20Dapper%20Hair%20Lounge%20Kenwick
