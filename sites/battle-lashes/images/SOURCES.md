@@ -1,0 +1,6 @@
+# Image Sources — Battle Lashes
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | hair3.jpg |
+| icon-*.png | Generated (Pillow) | BA monogram |
