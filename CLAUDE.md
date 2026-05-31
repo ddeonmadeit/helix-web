@@ -56,9 +56,9 @@ To refresh the queue with new leads, run: `node generate-queue.js --count=20`
 
 Any company name / location / phone / description → start immediately. Single ambiguous word with no context → ask one question. Otherwise go.
 
-### "Run site factory" — batch trigger phrase
+### "SF!" — batch trigger phrase
 
-When the user says **"run site factory"** (or any close paraphrase: "run the factory", "process the queue", "do the queue"):
+When the user says **"SF!"**:
 
 1. `git pull origin claude/one-page-website-designer-vpSDS` first.
 2. Process `QUEUE.md` per the Batch queue rules at the top of this file (one site at a time, full Phase 1–5, push after each, remove the processed line and commit it with the site).
