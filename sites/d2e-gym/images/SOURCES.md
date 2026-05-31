@@ -1,0 +1,6 @@
+# Image Sources — D2E GYM
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | gym1.jpg |
+| icon-*.png | Generated (Pillow) | D2 monogram |
