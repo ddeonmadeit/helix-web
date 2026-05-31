@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-10. **Hulk Barber Shop** · Kenwick
-   Hairdressers · 📞 +61497982311 · 📍 69 Belmont Rd, Kenwick WA 6107, Australia
-   https://www.google.com/maps/search/?api=1&query=Hulk%20Barber%20Shop%20Kenwick
-
 11. **ACE Services Hunter** · Cardiff
    HVAC · 📞 +61249487910
    https://www.google.com/maps/search/?api=1&query=ACE%20Services%20Hunter%20Cardiff
