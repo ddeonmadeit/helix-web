@@ -11,7 +11,9 @@ One job: research a company, build a complete distinctive one-page site, commit 
 1. Read `QUEUE.md` — it contains a numbered list of businesses with name, location, industry, phone, address
 2. Build each site one by one using the full workflow below
 3. After each commit + push, move to the next item
-4. When the list is done, delete `QUEUE.md` and stop
+4. When the list is done, stop and wait for the next trigger
+
+**Never modify or delete `QUEUE.md` — it is managed externally and will be automatically overwritten with fresh leads.** Don't add `# SKIPPED` lines, don't remove processed entries, don't `rm` it after finishing. Just read it and build.
 
 Each lead line looks like:
 ```
@@ -63,10 +65,10 @@ Any company name / location / phone / description → start immediately. Single 
 When the user says **"SF!"**:
 
 1. `git pull origin claude/one-page-website-designer-vpSDS` first.
-2. Process `QUEUE.md` per the Batch queue rules at the top of this file (one site at a time, full Phase 1–5, push after each, remove the processed line and commit it with the site).
+2. Process `QUEUE.md` per the Batch queue rules at the top of this file (one site at a time, full Phase 1–5, push after each). **Do not edit, rewrite, or delete `QUEUE.md` itself — it's externally managed and gets overwritten.**
 3. Between sites, no recap or status prose — just move to the next.
 4. After the final one, reply with a single summary line: `Factory done — N sites built: slug1, slug2, …`.
-5. If a lead fails (no usable data, hits a hard block), skip it, leave a `# SKIPPED: <line> — <reason>` line in `QUEUE.md`, and continue.
+5. If a lead fails (no usable data, hits a hard block), skip it silently and move on — don't touch `QUEUE.md`.
 
 Each individual site still follows all normal rules (no invented facts, hero photo, Phase 4.5 mobile QA, etc.).
 
