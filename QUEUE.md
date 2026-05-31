@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-13. **Billington's Window & Pressure Cleaning Service** · Warrnambool
-   Cleaners · 📞 +61355622516 · 📍 8 Mountain Ash Dr, Warrnambool VIC 3280, Australia
-   https://www.google.com/maps/search/?api=1&query=Billington's%20Window%20%26%20Pressure%20Cleaning%20Service%20Warrnambool
-
 14. **Graham's Cleaning Supplies** · Warrnambool
    Cleaners · 📞 +61355613800 · 📍 Ozone Carpark, 34/38 Kepler St, Warrnambool VIC 3280, Australia
    https://www.google.com/maps/search/?api=1&query=Graham's%20Cleaning%20Supplies%20Warrnambool
