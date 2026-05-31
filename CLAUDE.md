@@ -4,6 +4,26 @@ One job: research a company, build a complete distinctive one-page site, commit 
 
 ---
 
+## Batch queue — check this first on every startup
+
+**If `QUEUE.md` exists in the repo root, process it automatically — no need to be told.**
+
+1. Read `QUEUE.md` — it contains a numbered list of businesses with name, location, industry, phone, address
+2. Build each site one by one using the full workflow below
+3. After each commit + push, move to the next item
+4. When the list is done, delete `QUEUE.md` and stop
+
+Each lead line looks like:
+```
+1. **Business Name** · Location · Industry · 📞 +61... · 📍 Address · ⭐ rating
+```
+
+No Google Maps URL will be provided — use the business name + location + industry to infer services. Follow the full CLAUDE.md design system for each site. No invented facts.
+
+To refresh the queue with new leads, run: `node generate-queue.js --count=20`
+
+---
+
 ## Speed rules — read first
 
 **Budget: ~10–12 tool calls. Over 20 before commit = you're meandering — stop and finish.**
