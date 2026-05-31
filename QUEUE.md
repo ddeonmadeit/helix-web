@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-15. **Ford Air Conditioning** · Cardiff
-   HVAC · 📞 +61439865395 · 📍 2b/49 Pendlebury Rd, Cardiff NSW 2285, Australia
-   https://www.google.com/maps/search/?api=1&query=Ford%20Air%20Conditioning%20Cardiff
-
 16. **Warrnambool Laundrette - Lava Street** · Warrnambool
    Cleaners · 📞 +61408532521 · 📍 221 Lava St, Warrnambool VIC 3280, Australia
    https://www.google.com/maps/search/?api=1&query=Warrnambool%20Laundrette%20-%20Lava%20Street%20Warrnambool
