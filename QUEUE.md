@@ -5,10 +5,6 @@ Build, commit and push, then move to the next.
 
 ---
 
-6. **MV Consulting** · Newnham TAS
-   Accountants · 📞 +61363266276 · 📍 116 Alanvale Rd, Newnham TAS 7248, Australia
-   https://www.google.com/maps/search/?api=1&query=MV%20Consulting%20Newnham%20TAS
-
 7. **Top Secret for Hair** · Kenwick
    Hairdressers · 📞 +61894595548 · 📍 1/13 Blackburn St, Maddington WA 6109, Australia
    https://www.google.com/maps/search/?api=1&query=Top%20Secret%20for%20Hair%20Kenwick
