@@ -1,0 +1,6 @@
+# Image Sources — GEM Car Sound & Auto Electronics
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | restaurant1.jpg |
+| icon-*.png | Generated (Pillow) | GE monogram |
