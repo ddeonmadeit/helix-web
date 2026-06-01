@@ -197,13 +197,14 @@ async function deploySite(slug, pipelinePhones) {
 
 // ── Main poll loop ─────────────────────────────────────────────────────────────
 async function poll() {
-  // 1. Pull latest
-  log('Pulling from GitHub...');
+  // 1. Sync with remote (fetch + hard reset handles amended commits from other computer)
+  log('Syncing with GitHub...');
   try {
-    const out = exec('git pull --ff-only 2>&1').trim();
-    log(out.split('\n')[0]); // first line only
+    exec('git fetch origin 2>&1');
+    const out = exec('git reset --hard origin/claude/one-page-website-designer-vpSDS 2>&1').trim();
+    log(out.split('\n')[0]);
   } catch (err) {
-    log(`git pull failed: ${err.message.split('\n')[0]}`);
+    log(`git sync failed: ${err.message.split('\n')[0]}`);
     return;
   }
 
