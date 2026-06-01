@@ -1,0 +1,6 @@
+# Image Sources — The Barb & Whistle Barber
+
+| File | Source | Notes |
+|---|---|---|
+| hero.jpg | Unsplash stock | hair6.jpg |
+| icon-*.png | Generated (Pillow) | TH monogram |
