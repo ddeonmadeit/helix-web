@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wordy Wines — Shop by Occasion (Preview)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #faf7f2;
+    --cream2: #f3ede4;
+    --cream3: #ebe3d8;
+    --gold: #b8893a;
+    --gold-light: #d4a85c;
+    --wine: #6b2737;
+    --text: #1a1210;
+    --text2: #5a4d46;
+    --text3: #9c8b82;
+    --border: #ddd5c8;
+    --white: #ffffff;
+    --radius: 14px;
+    --shadow: 0 2px 12px rgba(0,0,0,.07);
+    --shadow-hover: 0 10px 32px rgba(0,0,0,.13);
+  }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    min-height: 100vh;
+  }
+
+  /* ── MOCK NAV ─────────────────────────────────────── */
+  .nav {
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    height: 68px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 clamp(20px, 5vw, 60px);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav__logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--wine);
+    text-decoration: none;
+    letter-spacing: .02em;
+  }
+  .nav__logo span { color: var(--gold); }
+  .nav__links {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+  }
+  .nav__links a {
+    text-decoration: none;
+    color: var(--text2);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  .nav__links a.active { color: var(--wine); font-weight: 700; }
+  .nav__cta {
+    background: var(--wine);
+    color: var(--white);
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .12em;
+    text-transform: uppercase;
+    text-decoration: none;
+  }
+  @media (max-width: 700px) {
+    .nav__links { display: none; }
+  }
+
+  /* ── PAGE HEADER ──────────────────────────────────── */
+  .page-header {
+    text-align: center;
+    padding: clamp(48px, 8vw, 80px) clamp(20px, 5vw, 60px) clamp(24px, 4vw, 40px);
+    max-width: 640px;
+    margin: 0 auto;
+  }
+  .page-header__kicker {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 18px;
+  }
+  .page-header__kicker::before,
+  .page-header__kicker::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 1px;
+    background: var(--gold);
+    opacity: .7;
+  }
+  .page-header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(36px, 6vw, 58px);
+    font-weight: 700;
+    line-height: 1.05;
+    color: var(--wine);
+    margin-bottom: 14px;
+  }
+  .page-header h1 em {
+    font-style: italic;
+    color: var(--gold);
+  }
+  .page-header p {
+    color: var(--text2);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  /* ── OCCASION GRID ────────────────────────────────── */
+  .occ-wrap {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 clamp(20px, 5vw, 60px) clamp(60px, 8vw, 100px);
+  }
+
+  .occ-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 14px;
+  }
+
+  .occ-tile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px 20px 28px;
+    background: var(--white);
+    border-radius: var(--radius);
+    text-decoration: none;
+    color: var(--text);
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow);
+    transition: transform .22s ease, box-shadow .22s ease, border-color .22s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .occ-tile::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform .3s ease;
+  }
+  .occ-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-hover);
+    border-color: var(--gold-light);
+  }
+  .occ-tile:hover::after { transform: scaleX(1); }
+
+  .occ-tile__emoji {
+    font-size: 36px;
+    margin-bottom: 12px;
+    line-height: 1;
+    display: block;
+  }
+  .occ-tile__name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    margin-bottom: 5px;
+    line-height: 1.2;
+  }
+  .occ-tile__collection {
+    font-size: 11px;
+    color: var(--text3);
+    font-style: italic;
+    font-family: 'Playfair Display', serif;
+  }
+
+  /* ── DIVIDER LABEL ────────────────────────────────── */
+  .occ-section-label {
+    grid-column: 1 / -1;
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: .22em;
+    text-transform: uppercase;
+    color: var(--text3);
+    margin-top: 8px;
+  }
+  .occ-section-label::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+
+  /* ── BOTTOM BANNER ────────────────────────────────── */
+  .promo-banner {
+    background: var(--wine);
+    color: var(--white);
+    text-align: center;
+    padding: clamp(40px, 6vw, 64px) clamp(20px, 5vw, 60px);
+    margin-top: 0;
+  }
+  .promo-banner h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(24px, 4vw, 38px);
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .promo-banner p {
+    font-size: 15px;
+    opacity: .8;
+    margin-bottom: 24px;
+  }
+  .promo-banner .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--gold);
+    color: var(--white);
+    padding: 14px 32px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 700;
+    letter-spacing: .16em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background .2s;
+  }
+  .promo-banner .btn:hover { background: var(--gold-light); }
+
+  /* ── PREVIEW LABEL ────────────────────────────────── */
+  .preview-label {
+    background: #1a1a2e;
+    color: #fff;
+    text-align: center;
+    font-size: 12px;
+    padding: 10px;
+    letter-spacing: .1em;
+    font-weight: 600;
+  }
+  .preview-label span { color: #a0c4ff; }
+</style>
+</head>
+<body>
+
+<div class="preview-label">PREVIEW — <span>wordywines.com.au · Shop by Occasion page concept</span></div>
+
+<!-- Mock Nav -->
+<nav class="nav">
+  <a class="nav__logo" href="#">Wordy<span>Wines</span></a>
+  <ul class="nav__links">
+    <li><a href="#">About</a></li>
+    <li><a href="#">Stockists</a></li>
+    <li><a href="#">Personalised Wine</a></li>
+    <li><a href="#">Fundraising</a></li>
+    <li><a href="#" class="active">Shop Wines</a></li>
+    <li><a href="#">Cedar & Pine Bar</a></li>
+  </ul>
+  <a class="nav__cta" href="#">Cart (0)</a>
+</nav>
+
+<!-- Page Header -->
+<header class="page-header">
+  <span class="page-header__kicker">Shop Wines</span>
+  <h1>What's the<br><em>occasion?</em></h1>
+  <p>Pick your moment and we'll show you the perfect $25 bottle — funny label included.</p>
+</header>
+
+<!-- Occasion Grid -->
+<div class="occ-wrap">
+  <div class="occ-grid">
+
+    <span class="occ-section-label">Celebrations</span>
+
+    <a class="occ-tile" href="/collections/another-year-older">
+      <span class="occ-tile__emoji">🎂</span>
+      <span class="occ-tile__name">Birthday</span>
+      <span class="occ-tile__collection">Another Year Older</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/all-class">
+      <span class="occ-tile__emoji">🎓</span>
+      <span class="occ-tile__name">Graduation</span>
+      <span class="occ-tile__collection">All Class</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/retired-life">
+      <span class="occ-tile__emoji">🌅</span>
+      <span class="occ-tile__name">Retirement</span>
+      <span class="occ-tile__collection">Retired Life</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/schools-out">
+      <span class="occ-tile__emoji">🍎</span>
+      <span class="occ-tile__name">Teacher / End of Year</span>
+      <span class="occ-tile__collection">School's Out</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/merry-everything">
+      <span class="occ-tile__emoji">🎄</span>
+      <span class="occ-tile__name">Christmas</span>
+      <span class="occ-tile__collection">Merry Everything</span>
+    </a>
+
+    <span class="occ-section-label">Family & Love</span>
+
+    <a class="occ-tile" href="/collections/mums-the-word">
+      <span class="occ-tile__emoji">💐</span>
+      <span class="occ-tile__name">Mum / Mother's Day</span>
+      <span class="occ-tile__collection">Mum's The Word</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/dad-life">
+      <span class="occ-tile__emoji">🍺</span>
+      <span class="occ-tile__name">Dad / Father's Day</span>
+      <span class="occ-tile__collection">Dad Life</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/its-a-love-story">
+      <span class="occ-tile__emoji">❤️</span>
+      <span class="occ-tile__name">Wedding / Anniversary</span>
+      <span class="occ-tile__collection">It's A Love Story</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/oh-baby">
+      <span class="occ-tile__emoji">👶</span>
+      <span class="occ-tile__name">New Baby</span>
+      <span class="occ-tile__collection">Oh Baby!</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/home-sweet-home">
+      <span class="occ-tile__emoji">🏠</span>
+      <span class="occ-tile__name">New Home</span>
+      <span class="occ-tile__collection">Home Sweet Home</span>
+    </a>
+
+    <span class="occ-section-label">Just For Fun</span>
+
+    <a class="occ-tile" href="/collections/just-because">
+      <span class="occ-tile__emoji">🙃</span>
+      <span class="occ-tile__name">Just Because</span>
+      <span class="occ-tile__collection">No reason needed</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/game-on">
+      <span class="occ-tile__emoji">🏆</span>
+      <span class="occ-tile__name">Sports Fan</span>
+      <span class="occ-tile__collection">Game On</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/trivia-trivia-trivia">
+      <span class="occ-tile__emoji">🎯</span>
+      <span class="occ-tile__name">Trivia Night</span>
+      <span class="occ-tile__collection">Trivia Trivia Trivia</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/petrol-or-pinot">
+      <span class="occ-tile__emoji">⛽</span>
+      <span class="occ-tile__name">Petrol Head</span>
+      <span class="occ-tile__collection">Petrol Or Pinot?</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/divorced-af">
+      <span class="occ-tile__emoji">🥂</span>
+      <span class="occ-tile__name">Fresh Start</span>
+      <span class="occ-tile__collection">Divorced AF</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/the-f-word-collection">
+      <span class="occ-tile__emoji">💣</span>
+      <span class="occ-tile__name">The F-Word</span>
+      <span class="occ-tile__collection">The F-Word Collection</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/holy-shit">
+      <span class="occ-tile__emoji">😱</span>
+      <span class="occ-tile__name">Holy Sh*t Moment</span>
+      <span class="occ-tile__collection">Holy Shit</span>
+    </a>
+
+    <a class="occ-tile" href="/collections/not-gonna-lie">
+      <span class="occ-tile__emoji">🗣️</span>
+      <span class="occ-tile__name">The Honest Truth</span>
+      <span class="occ-tile__collection">Not Gonna Lie</span>
+    </a>
+
+  </div>
+</div>
+
+<!-- Promo Banner -->
+<div class="promo-banner">
+  <h2>Mix & match any 6 bottles.</h2>
+  <p>20% off when you buy any six — different occasions, one great order.</p>
+  <a class="btn" href="/collections">Browse all collections →</a>
+</div>
+
+</body>
+</html>
