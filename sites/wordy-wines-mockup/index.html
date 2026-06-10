@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wordy Wines — Funny Wine Labels & Gifts</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#faf7f2;--cream2:#f3ede4;--cream3:#ebe3d8;
+  --gold:#b8893a;--gold-l:#d4a85c;
+  --wine:#6b2737;--wine-d:#4d1c28;--wine-a:rgba(107,39,55,.08);
+  --text:#1a1210;--t2:#5a4d46;--t3:#9c8b82;
+  --border:#ddd5c8;--white:#fff;
+  --r:12px;--sh:0 2px 10px rgba(0,0,0,.06);--sh2:0 12px 36px rgba(0,0,0,.14);
+  --nav:68px;
+}
+html{scroll-behavior:smooth}
+body{font-family:'Inter',sans-serif;background:var(--cream);color:var(--text);min-height:100vh;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{display:block;width:100%;height:100%;object-fit:cover}
+button{cursor:pointer;border:none;font-family:inherit}
+
+/* ── PREVIEW BANNER ── */
+.preview-bar{background:#1a1a2e;color:#a0c4ff;text-align:center;font-size:11px;padding:8px;letter-spacing:.1em;font-weight:600}
+
+/* ── PROMO BAR ── */
+.promo-bar{background:var(--wine);color:#fff;text-align:center;font-size:12px;font-weight:700;letter-spacing:.08em;padding:10px;text-transform:uppercase}
+.promo-bar a{color:var(--gold-l);text-decoration:underline;margin-left:8px}
+
+/* ── NAV ── */
+.nav{position:sticky;top:0;z-index:200;background:var(--white);border-bottom:1px solid var(--border);height:var(--nav);display:flex;align-items:center;justify-content:space-between;padding:0 clamp(16px,4vw,56px)}
+.nav__logo{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--wine);letter-spacing:.02em;cursor:pointer}
+.nav__logo span{color:var(--gold)}
+.nav__links{display:flex;align-items:center;gap:24px;list-style:none}
+.nav__links>li{position:relative}
+.nav__links a,.nav__links button{background:none;font-size:12px;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--t2);padding:4px 0;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;white-space:nowrap}
+.nav__links a:hover,.nav__links button:hover{color:var(--wine);border-bottom-color:var(--wine)}
+/* mega-menu */
+.nav-mega{position:relative}
+.mega{position:absolute;top:calc(100% + 16px);left:50%;transform:translateX(-50%);background:var(--white);border:1px solid var(--border);border-radius:var(--r);box-shadow:var(--sh2);padding:28px;display:grid;grid-template-columns:repeat(3,180px);gap:24px 32px;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s;transform-origin:top center;transform:translateX(-50%) translateY(-6px)}
+.nav-mega:hover .mega{opacity:1;pointer-events:auto;transform:translateX(-50%) translateY(0)}
+.mega::before{content:'';position:absolute;top:-8px;left:50%;transform:translateX(-50%);border:8px solid transparent;border-bottom-color:var(--border);border-top:none}
+.mega-col h4{font-size:10px;font-weight:700;letter-spacing:.22em;text-transform:uppercase;color:var(--t3);margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border)}
+.mega-col a{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500;color:var(--t2);padding:5px 0;border:none;transition:color .15s}
+.mega-col a:hover{color:var(--wine)}
+.mega-col a span{font-size:16px}
+/* nav right */
+.nav__right{display:flex;align-items:center;gap:12px}
+.nav__cart{position:relative;background:none;width:44px;height:44px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s;color:var(--text)}
+.nav__cart:hover{background:var(--cream2)}
+.nav__cart svg{width:22px;height:22px}
+.cart-count{position:absolute;top:4px;right:4px;background:var(--wine);color:#fff;font-size:10px;font-weight:700;width:17px;height:17px;border-radius:50%;display:flex;align-items:center;justify-content:center;display:none}
+.cart-count.show{display:flex}
+.nav__cta{background:var(--wine);color:#fff;padding:10px 20px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;cursor:pointer;transition:background .15s}
+.nav__cta:hover{background:var(--wine-d)}
+@media(max-width:760px){.nav__links{display:none}}
+
+/* ── PAGES ── */
+.page{display:none}
+.page.active{display:block}
+
+/* ── HOME: HERO ── */
+.hero{display:grid;grid-template-columns:1fr 1fr;align-items:center;min-height:calc(100svh - var(--nav));padding:clamp(40px,6vw,80px) clamp(16px,4vw,56px);gap:40px}
+.hero__copy{max-width:540px}
+.hero__kicker{display:inline-flex;align-items:center;gap:10px;font-size:10px;font-weight:700;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);margin-bottom:20px}
+.hero__kicker::before,.hero__kicker::after{content:'';display:block;width:24px;height:1px;background:var(--gold)}
+.hero h1{font-family:'Playfair Display',serif;font-size:clamp(42px,6vw,72px);font-weight:700;line-height:1.05;color:var(--wine);margin-bottom:18px}
+.hero h1 em{font-style:italic;color:var(--gold)}
+.hero__sub{font-size:17px;color:var(--t2);line-height:1.6;margin-bottom:28px;max-width:400px}
+.hero__btns{display:flex;gap:12px;flex-wrap:wrap}
+.btn-primary{background:var(--wine);color:#fff;padding:14px 28px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;transition:background .15s;cursor:pointer;border:none;font-family:inherit}
+.btn-primary:hover{background:var(--wine-d)}
+.btn-ghost{background:transparent;color:var(--wine);padding:13px 28px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;border:1.5px solid var(--wine);transition:all .15s;cursor:pointer;font-family:inherit}
+.btn-ghost:hover{background:var(--wine);color:#fff}
+.hero__visual{display:grid;grid-template-columns:1fr 1fr;gap:12px;align-items:start}
+.hero__img{border-radius:var(--r);overflow:hidden;box-shadow:var(--sh2)}
+.hero__img:first-child{grid-column:1/2;aspect-ratio:2/3;margin-top:40px}
+.hero__img:nth-child(2){grid-column:2/3;aspect-ratio:2/3}
+.hero__img:nth-child(3){grid-column:1/3;aspect-ratio:3/1;margin-top:-24px}
+@media(max-width:720px){.hero{grid-template-columns:1fr;min-height:auto;padding-top:32px}.hero__visual{display:none}}
+
+/* ── OCCASIONS GRID ── */
+.occasions{padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px);max-width:1200px;margin:0 auto}
+.section-head{text-align:center;margin-bottom:40px}
+.section-head h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,42px);font-weight:700;color:var(--wine);margin-bottom:10px}
+.section-head h2 em{font-style:italic;color:var(--gold)}
+.section-head p{color:var(--t2);font-size:15px}
+.occ-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+.occ-tile{display:flex;flex-direction:column;align-items:center;text-align:center;padding:28px 16px 22px;background:var(--white);border-radius:var(--r);border:1.5px solid var(--border);box-shadow:var(--sh);cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden}
+.occ-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:var(--wine);transform:scaleX(0);transform-origin:left;transition:transform .25s}
+.occ-tile:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:var(--wine)}
+.occ-tile:hover::after{transform:scaleX(1)}
+.occ-tile__emoji{font-size:34px;margin-bottom:10px;line-height:1}
+.occ-tile__name{font-size:14px;font-weight:700;color:var(--text);margin-bottom:4px;line-height:1.2}
+.occ-tile__desc{font-size:11px;color:var(--t3);line-height:1.4}
+@media(max-width:720px){.occ-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:400px){.occ-grid{grid-template-columns:repeat(2,1fr);gap:10px}.occ-tile{padding:20px 12px 16px}}
+
+/* ── FEATURED ── */
+.featured{background:var(--cream2);padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px)}
+.featured__inner{max-width:1200px;margin:0 auto}
+.featured__head{display:flex;align-items:center;justify-content:space-between;margin-bottom:32px}
+.featured__head h2{font-family:'Playfair Display',serif;font-size:clamp(24px,3.5vw,36px);font-weight:700;color:var(--wine)}
+.featured__head h2 em{font-style:italic}
+.featured__all{font-size:12px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border-bottom:1px solid var(--gold);padding-bottom:2px;cursor:pointer;background:none;border-top:none;border-left:none;border-right:none;font-family:inherit}
+.prod-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+@media(max-width:900px){.prod-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.prod-grid{grid-template-columns:repeat(2,1fr);gap:10px}}
+
+/* ── PRODUCT CARD ── */
+.prod-card{background:var(--white);border-radius:var(--r);border:1px solid var(--border);overflow:hidden;cursor:pointer;transition:transform .2s,box-shadow .2s;position:relative}
+.prod-card:hover{transform:translateY(-3px);box-shadow:var(--sh2)}
+.prod-card__img{aspect-ratio:1;position:relative;overflow:hidden;background:var(--cream3)}
+.prod-card__img img{transition:transform .35s}
+.prod-card:hover .prod-card__img img{transform:scale(1.05)}
+.prod-card__tag{position:absolute;top:10px;left:10px;background:var(--wine);color:#fff;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:4px 10px;border-radius:999px}
+.prod-card__body{padding:14px}
+.prod-card__name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:10px;line-height:1.35;height:36px;overflow:hidden;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.prod-card__foot{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.prod-card__price{font-size:15px;font-weight:700;color:var(--wine)}
+.prod-card__atc{background:var(--wine);color:#fff;padding:8px 14px;border-radius:999px;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;transition:background .15s;border:none;cursor:pointer;font-family:inherit;flex-shrink:0}
+.prod-card__atc:hover{background:var(--wine-d)}
+.prod-card__occ{font-size:10px;color:var(--t3);font-style:italic;margin-top:4px}
+
+/* ── SIX-PACK PROMO ── */
+.sixpack{background:var(--wine);color:#fff;text-align:center;padding:clamp(48px,6vw,72px) clamp(16px,4vw,56px)}
+.sixpack h2{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,48px);font-weight:700;margin-bottom:12px}
+.sixpack h2 em{font-style:italic;color:var(--gold-l)}
+.sixpack p{font-size:15px;opacity:.85;margin-bottom:28px;max-width:500px;margin-left:auto;margin-right:auto;line-height:1.6}
+.sixpack .btn-gold{background:var(--gold);color:#fff;padding:14px 36px;border-radius:999px;font-size:12px;font-weight:700;letter-spacing:.16em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:background .15s}
+.sixpack .btn-gold:hover{background:var(--gold-l)}
+
+/* ── SHOP PAGE ── */
+.shop-header{padding:clamp(32px,5vw,56px) clamp(16px,4vw,56px) 24px;max-width:1200px;margin:0 auto}
+.shop-header h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--wine);margin-bottom:8px}
+.shop-header h1 em{font-style:italic}
+.shop-header p{color:var(--t2);font-size:15px}
+.filter-bar{padding:0 clamp(16px,4vw,56px) 28px;max-width:1200px;margin:0 auto;display:flex;gap:8px;flex-wrap:wrap}
+.filter-btn{padding:9px 18px;border-radius:999px;background:var(--white);border:1.5px solid var(--border);font-size:12px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .15s;font-family:inherit;white-space:nowrap}
+.filter-btn:hover{border-color:var(--wine);color:var(--wine)}
+.filter-btn.active{background:var(--wine);border-color:var(--wine);color:#fff}
+.shop-grid-wrap{max-width:1200px;margin:0 auto;padding:0 clamp(16px,4vw,56px) clamp(48px,6vw,80px)}
+.shop-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.prod-card.hidden{display:none}
+.shop-count{font-size:12px;color:var(--t3);margin-bottom:16px;font-weight:500}
+
+/* ── ABOUT PAGE ── */
+.about-wrap{max-width:760px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px)}
+.about-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(32px,5vw,52px);font-weight:700;color:var(--wine);margin-bottom:24px}
+.about-wrap h1 em{font-style:italic;color:var(--gold)}
+.about-wrap p{font-size:16px;color:var(--t2);line-height:1.75;margin-bottom:20px}
+.about-wrap strong{color:var(--text)}
+
+/* ── CONTACT PAGE ── */
+.contact-wrap{max-width:600px;margin:0 auto;padding:clamp(48px,6vw,80px) clamp(16px,4vw,56px)}
+.contact-wrap h1{font-family:'Playfair Display',serif;font-size:clamp(28px,4vw,44px);font-weight:700;color:var(--wine);margin-bottom:8px}
+.contact-wrap>p{color:var(--t2);font-size:15px;margin-bottom:32px;line-height:1.6}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:16px}
+.form-field{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.form-field label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
+.form-field input,.form-field textarea,.form-field select{background:var(--white);border:1.5px solid var(--border);border-radius:8px;padding:12px 14px;font-size:14px;font-family:inherit;color:var(--text);transition:border-color .15s}
+.form-field input:focus,.form-field textarea:focus,.form-field select:focus{outline:none;border-color:var(--wine)}
+.form-field textarea{min-height:120px;resize:vertical}
+@media(max-width:540px){.form-row{grid-template-columns:1fr}}
+
+/* ── FOOTER ── */
+.foot{background:var(--wine-d);color:rgba(255,255,255,.7);padding:clamp(32px,4vw,48px) clamp(16px,4vw,56px)}
+.foot__inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:16px}
+.foot__logo{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;color:#fff;cursor:pointer}
+.foot__logo span{color:var(--gold-l)}
+.foot__links{display:flex;gap:20px;flex-wrap:wrap}
+.foot__links button{background:none;border:none;font-size:13px;color:rgba(255,255,255,.6);cursor:pointer;font-family:inherit;transition:color .15s}
+.foot__links button:hover{color:#fff}
+.foot__credit{font-size:12px}
+.foot__credit a{color:var(--gold-l)}
+
+/* ── PRODUCT MODAL ── */
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:500;display:none;align-items:center;justify-content:center;padding:20px}
+.modal-overlay.open{display:flex}
+.modal{background:var(--white);border-radius:16px;max-width:840px;width:100%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.modal__img{aspect-ratio:1;background:var(--cream3);border-radius:16px 0 0 16px;overflow:hidden;flex-shrink:0}
+.modal__body{padding:32px}
+.modal__close{position:absolute;top:16px;right:16px;background:var(--cream2);border:none;width:36px;height:36px;border-radius:50%;font-size:18px;cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:10;color:var(--text)}
+.modal__occ{font-size:11px;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:10px}
+.modal__name{font-family:'Playfair Display',serif;font-size:clamp(20px,3vw,26px);font-weight:700;color:var(--wine);margin-bottom:8px;line-height:1.15}
+.modal__price{font-size:22px;font-weight:700;color:var(--text);margin-bottom:20px}
+.modal__price span{font-size:13px;font-weight:500;color:var(--t3);margin-left:4px}
+.modal__label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2);margin-bottom:8px}
+.variant-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px;margin-bottom:20px}
+.variant-btn{padding:10px;border-radius:8px;background:var(--cream);border:1.5px solid var(--border);font-size:12px;font-weight:600;color:var(--t2);cursor:pointer;transition:all .15s;font-family:inherit;text-align:center}
+.variant-btn:hover{border-color:var(--wine);color:var(--wine)}
+.variant-btn.selected{background:var(--wine);border-color:var(--wine);color:#fff}
+.qty-row{display:flex;align-items:center;gap:12px;margin-bottom:24px}
+.qty-label{font-size:11px;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--t2)}
+.qty-ctrl{display:flex;align-items:center;gap:2px;background:var(--cream2);border-radius:999px;padding:2px}
+.qty-ctrl button{width:32px;height:32px;border-radius:50%;background:none;border:none;font-size:18px;cursor:pointer;color:var(--text);display:flex;align-items:center;justify-content:center;font-family:inherit}
+.qty-ctrl button:hover{background:var(--border)}
+.qty-ctrl span{min-width:28px;text-align:center;font-size:14px;font-weight:700}
+.modal__atc{width:100%;background:var(--wine);color:#fff;padding:15px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:background .15s;margin-bottom:10px}
+.modal__atc:hover{background:var(--wine-d)}
+.modal__link{display:block;text-align:center;font-size:12px;color:var(--t3);border-bottom:1px solid var(--border);padding-bottom:2px;width:fit-content;margin:0 auto}
+@media(max-width:640px){.modal{grid-template-columns:1fr}.modal__img{border-radius:16px 16px 0 0;aspect-ratio:4/3}.modal__img img{object-position:center top}}
+
+/* ── CART PANEL ── */
+.cart-overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:600;display:none}
+.cart-overlay.open{display:block}
+.cart-panel{position:fixed;top:0;right:-420px;width:min(420px,100vw);height:100%;background:var(--white);z-index:700;display:flex;flex-direction:column;transition:right .3s cubic-bezier(.2,.7,.2,1);box-shadow:-8px 0 40px rgba(0,0,0,.15)}
+.cart-panel.open{right:0}
+.cart-panel__head{display:flex;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--border)}
+.cart-panel__head h3{font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--wine)}
+.cart-close{background:none;border:none;font-size:22px;cursor:pointer;color:var(--t2);width:36px;height:36px;display:flex;align-items:center;justify-content:center;border-radius:50%;transition:background .15s}
+.cart-close:hover{background:var(--cream2)}
+.cart-items{flex:1;overflow-y:auto;padding:16px 24px}
+.cart-empty{text-align:center;padding:48px 0;color:var(--t3)}
+.cart-empty p{font-size:15px;margin-bottom:16px}
+.cart-item{display:grid;grid-template-columns:72px 1fr auto;gap:12px;align-items:start;padding:14px 0;border-bottom:1px solid var(--border)}
+.cart-item:last-child{border-bottom:none}
+.cart-item__img{aspect-ratio:1;border-radius:8px;overflow:hidden;background:var(--cream3)}
+.cart-item__name{font-size:13px;font-weight:600;color:var(--text);line-height:1.3;margin-bottom:3px}
+.cart-item__meta{font-size:11px;color:var(--t3)}
+.cart-item__price{font-size:14px;font-weight:700;color:var(--wine)}
+.cart-item__remove{background:none;border:none;color:var(--t3);font-size:18px;cursor:pointer;padding:0;margin-top:2px;line-height:1}
+.cart-item__remove:hover{color:var(--wine)}
+.cart-foot{padding:20px 24px;border-top:1px solid var(--border)}
+.cart-total{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-weight:700;font-size:16px}
+.cart-discount{font-size:12px;color:var(--gold);font-weight:600;margin-bottom:12px}
+.cart-checkout{width:100%;background:var(--wine);color:#fff;padding:15px;border-radius:999px;font-size:13px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;border:none;cursor:pointer;font-family:inherit;transition:background .15s}
+.cart-checkout:hover{background:var(--wine-d)}
+.cart-shop-more{display:block;text-align:center;margin-top:12px;font-size:12px;font-weight:600;color:var(--t3);background:none;border:none;cursor:pointer;font-family:inherit}
+.cart-shop-more:hover{color:var(--wine)}
+
+/* ── TOAST ── */
+.toast{position:fixed;bottom:24px;right:24px;z-index:900;background:var(--wine-d);color:#fff;padding:12px 20px;border-radius:10px;font-size:13px;font-weight:600;box-shadow:var(--sh2);transform:translateY(80px);opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{transform:translateY(0);opacity:1}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+</style>
+</head>
+<body>
+
+<div class="preview-bar">MOCKUP PREVIEW — wordywines.com.au redesign concept</div>
+<div class="promo-bar">🍷 20% off when you mix & match any 6 bottles — <a onclick="showPage('shop');return false">Shop now →</a></div>
+
+<!-- ── NAV ── -->
+<nav class="nav">
+  <div class="nav__logo" onclick="showPage('home')">Wordy<span>Wines</span></div>
+  <ul class="nav__links">
+    <li><a onclick="showPage('about');return false">About</a></li>
+    <li class="nav-mega">
+      <button onclick="showPage('shop')">Shop Wines ▾</button>
+      <div class="mega">
+        <div class="mega-col">
+          <h4>Celebrations</h4>
+          <a onclick="filterShop('birthday')"><span>🎂</span> Birthday</a>
+          <a onclick="filterShop('christmas')"><span>🎄</span> Christmas</a>
+          <a onclick="filterShop('wedding')"><span>❤️</span> Wedding</a>
+        </div>
+        <div class="mega-col">
+          <h4>Family</h4>
+          <a onclick="filterShop('mum')"><span>💐</span> For Mum</a>
+          <a onclick="filterShop('dad')"><span>🍺</span> For Dad</a>
+          <a onclick="filterShop('thankyou')"><span>🙏</span> Thank You</a>
+        </div>
+        <div class="mega-col">
+          <h4>Just For Fun</h4>
+          <a onclick="filterShop('afterdark')"><span>🌙</span> After Dark</a>
+          <a onclick="filterShop('justbecause')"><span>🙃</span> Just Because</a>
+          <a onclick="filterShop('fundraising')"><span>🎗️</span> Fundraising</a>
+        </div>
+      </div>
+    </li>
+    <li><a href="https://www.wordywines.com.au/pages/personalised-wine" target="_blank">Personalised</a></li>
+    <li><a onclick="showPage('contact');return false">Contact</a></li>
+  </ul>
+  <div class="nav__right">
+    <button class="nav__cart" onclick="openCart()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 01-8 0"/></svg>
+      <span class="cart-count" id="cartCount">0</span>
+    </button>
+    <button class="nav__cta" onclick="showPage('shop')">Shop Now</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════
+     PAGE: HOME
+══════════════════════════════════════ -->
+<div id="page-home" class="page active">
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero__copy">
+      <span class="hero__kicker">Funny · Clever · Unique</span>
+      <h1>The label<br>that <em>says it.</em></h1>
+      <p class="hero__sub">$25 a bottle. Every label so good they'll keep it. Australia-wide delivery.</p>
+      <div class="hero__btns">
+        <button class="btn-primary" onclick="showPage('shop')">Shop by Occasion</button>
+        <button class="btn-ghost" onclick="showPage('about')">Our Story</button>
+      </div>
+    </div>
+    <div class="hero__visual" id="heroVisual"></div>
+  </section>
+
+  <!-- Occasion tiles -->
+  <section class="occasions">
+    <div class="section-head">
+      <h2>What's the <em>occasion?</em></h2>
+      <p>One click to the right bottle. Every time.</p>
+    </div>
+    <div class="occ-grid" id="occGrid"></div>
+  </section>
+
+  <!-- Featured products -->
+  <section class="featured">
+    <div class="featured__inner">
+      <div class="featured__head">
+        <h2>Fan <em>favourites</em></h2>
+        <button class="featured__all" onclick="showPage('shop')">View all wines →</button>
+      </div>
+      <div class="prod-grid" id="featuredGrid"></div>
+    </div>
+  </section>
+
+  <!-- 6-pack promo -->
+  <section class="sixpack">
+    <h2>Mix & match <em>any 6.</em></h2>
+    <p>Birthday for him. Christmas for her. Just Because for anyone. 20% off when you grab six — different occasions welcome.</p>
+    <button class="btn-gold" onclick="showPage('shop')">Build Your 6-Pack →</button>
+  </section>
+
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: SHOP
+══════════════════════════════════════ -->
+<div id="page-shop" class="page">
+  <div class="shop-header">
+    <h1>Shop <em>All Wines</em></h1>
+    <p>281 labels. One for every situation. Filtered by what matters.</p>
+  </div>
+  <div class="filter-bar" id="filterBar"></div>
+  <div class="shop-grid-wrap">
+    <div class="shop-count" id="shopCount"></div>
+    <div class="shop-grid" id="shopGrid"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: ABOUT
+══════════════════════════════════════ -->
+<div id="page-about" class="page">
+  <div class="about-wrap">
+    <h1>About <em>Wordy Wines</em></h1>
+    <p>We started Wordy Wines because we were sick of turning up to birthdays, housewarming parties and awkward office Christmas functions with a bottle that said absolutely nothing. <strong>Wine should come with a label that means something.</strong> Or at least says something that makes everyone laugh.</p>
+    <p>Every label is designed in Australia. Every bottle is $25. Every single one is a better gift than a candle.</p>
+    <p>We've got labels for birthdays, retirements, new homes, new babies, weddings, divorces, teachers, nurses, besties, dads, mums — and everything in between that doesn't quite have a category yet.</p>
+    <p><strong>Australia-wide delivery.</strong> Free shipping on orders over $100. 20% off any 6 bottles — mix and match across every collection.</p>
+    <p>Questions? Head to our <button onclick="showPage('contact')" style="background:none;border:none;color:var(--wine);font-weight:700;cursor:pointer;font-size:16px;font-family:inherit">contact page</button>.</p>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════
+     PAGE: CONTACT
+══════════════════════════════════════ -->
+<div id="page-contact" class="page">
+  <div class="contact-wrap">
+    <h1>Get in <em style="font-style:italic;color:var(--gold)">touch</em></h1>
+    <p>Questions about an order, wholesale enquiries, or custom labels for your event — we'd love to hear from you.</p>
+    <div class="form-row">
+      <div class="form-field"><label>First Name</label><input type="text" placeholder="Jane"></div>
+      <div class="form-field"><label>Last Name</label><input type="text" placeholder="Smith"></div>
+    </div>
+    <div class="form-field"><label>Email</label><input type="email" placeholder="jane@example.com"></div>
+    <div class="form-field">
+      <label>What's it about?</label>
+      <select><option>Order enquiry</option><option>Custom labels</option><option>Wholesale / Stockist</option><option>Something else</option></select>
+    </div>
+    <div class="form-field"><label>Message</label><textarea placeholder="Tell us what you need..."></textarea></div>
+    <button class="btn-primary" style="width:100%;margin-top:8px" onclick="showToast('Message sent — we\'ll be in touch soon! 🍷')">Send Message</button>
+  </div>
+</div>
+
+<!-- ── FOOTER (shared) ── -->
+<footer class="foot" id="siteFooter">
+  <div class="foot__inner">
+    <div class="foot__logo" onclick="showPage('home')">Wordy<span>Wines</span></div>
+    <div class="foot__links">
+      <button onclick="showPage('about')">About</button>
+      <button onclick="showPage('shop')">Shop</button>
+      <button onclick="showPage('contact')">Contact</button>
+      <button onclick="window.open('https://www.wordywines.com.au','_blank')">Live Site ↗</button>
+    </div>
+    <span class="foot__credit">© 2026 Wordy Wines · <a href="https://helixsolution.au">Site by Helix</a></span>
+  </div>
+</footer>
+
+<!-- ── PRODUCT MODAL ── -->
+<div class="modal-overlay" id="modalOverlay" onclick="handleOverlayClick(event)">
+  <div class="modal" id="modal">
+    <button class="modal__close" onclick="closeModal()">✕</button>
+    <div class="modal__img"><img id="modalImg" src="" alt=""></div>
+    <div class="modal__body">
+      <div class="modal__occ" id="modalOcc"></div>
+      <div class="modal__name" id="modalName"></div>
+      <div class="modal__price">$25.00 <span>AUD / 750mL</span></div>
+      <div class="modal__label">Wine Type</div>
+      <div class="variant-grid" id="variantGrid"></div>
+      <div class="qty-row">
+        <span class="qty-label">Qty</span>
+        <div class="qty-ctrl">
+          <button onclick="changeQty(-1)">−</button>
+          <span id="modalQty">1</span>
+          <button onclick="changeQty(1)">+</button>
+        </div>
+      </div>
+      <button class="modal__atc" onclick="addFromModal()">Add to Cart</button>
+      <a class="modal__link" href="https://www.wordywines.com.au" target="_blank">View on wordywines.com.au ↗</a>
+    </div>
+  </div>
+</div>
+
+<!-- ── CART PANEL ── -->
+<div class="cart-overlay" id="cartOverlay" onclick="closeCart()"></div>
+<div class="cart-panel" id="cartPanel">
+  <div class="cart-panel__head">
+    <h3>Your Cart</h3>
+    <button class="cart-close" onclick="closeCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems"></div>
+  <div class="cart-foot" id="cartFoot" style="display:none">
+    <div class="cart-discount" id="cartDiscount"></div>
+    <div class="cart-total"><span>Total</span><span id="cartTotal"></span></div>
+    <button class="cart-checkout" onclick="window.open('https://www.wordywines.com.au/cart','_blank')">Checkout on Wordy Wines →</button>
+    <button class="cart-shop-more" onclick="closeCart();showPage('shop')">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div class="toast" id="toast"></div>
+
+<script>
+const CDN = 'https://www.wordywines.com.au/cdn/shop/files/';
+const VARIANTS = ['Sauvignon Blanc', 'Rosé', 'Shiraz', 'Bubbles'];
+
+const OCCASIONS = {
+  birthday:    { label:'Birthday',    emoji:'🎂', desc:'Make getting older bearable.' },
+  mum:         { label:'For Mum',     emoji:'💐', desc:'She was right. She always was.' },
+  dad:         { label:'For Dad',     emoji:'🍺', desc:'Cheers to the legend.' },
+  christmas:   { label:'Christmas',   emoji:'🎄', desc:'Festive AF and proud of it.' },
+  thankyou:    { label:'Thank You',   emoji:'🙏', desc:'Because a card just doesn\'t cut it.' },
+  wedding:     { label:'Wedding',     emoji:'❤️', desc:'Celebrate love, loudly.' },
+  afterdark:   { label:'After Dark',  emoji:'🌙', desc:'For when polite goes out the window.' },
+  fundraising: { label:'Fundraising', emoji:'🎗️', desc:'Good causes, good wine.' },
+  justbecause: { label:'Just Because',emoji:'🙃', desc:'No reason needed. None at all.' },
+};
+
+const PRODUCTS = [
+  {id:'b1',name:"Age Gets Better With Wine",price:25,occasion:'birthday',img:'agegetsbetter.jpg?v=1739069721',tag:'Best Seller'},
+  {id:'b2',name:"Happy Birthday, You Fckn' Queen",price:25,occasion:'birthday',img:'fckinqueen.jpg?v=1739069735'},
+  {id:'b3',name:"Fuck Yeah, Let's Party!",price:25,occasion:'birthday',img:'fckyeah.jpg?v=1739069735'},
+  {id:'b4',name:"Holy Shit You're Forty",price:25,occasion:'birthday',img:'holy_shit_40.jpg?v=1748216069'},
+  {id:'b5',name:"Talk Thirty To Me",price:25,occasion:'birthday',img:'talkthirty.jpg?v=1739069706'},
+  {id:'b6',name:"Sorry I Forgot Your Birthday",price:25,occasion:'birthday',img:'sorryiforgot.jpg?v=1739069732'},
+  {id:'b7',name:"Fifty And Fuckin' Fabulous, Queen",price:25,occasion:'birthday',img:'50fab.jpg?v=1739069734'},
+  {id:'b8',name:"Fuck Me, You're A Fossil",price:25,occasion:'birthday',img:'fossil.jpg?v=1739069672'},
+
+  {id:'m1',name:"Best Fckn' Mum In The World",price:25,occasion:'mum',img:'BestFckn_Mum.jpg?v=1739069722',tag:'Popular'},
+  {id:'m2',name:"You've Done A Grape Job Raisin Me",price:25,occasion:'mum',img:'Youve-done-a-grape-job-raisn-me-sauvblanc.jpg?v=1739069795'},
+  {id:'m3',name:"Sorry For My Teenage Years",price:25,occasion:'mum',img:'Sorry-for-my-teen-years-suavblanc.jpg?v=1739069796'},
+  {id:'m4',name:"You Were Right. There, I Said It.",price:25,occasion:'mum',img:'You-were-right-sauvblanc.jpg?v=1739069796'},
+  {id:'m5',name:"Just Another Manic Mum Day",price:25,occasion:'mum',img:'Just-another-manic-mum-day-sauvblanc.jpg?v=1739069772'},
+  {id:'m6',name:"Cheers To The Best Mum Ever!",price:25,occasion:'mum',img:'Cheers-to-the-best-mum-ever-sauvblanc.jpg?v=1739069775'},
+  {id:'m7',name:"Pairs Well With Mother Guilt",price:25,occasion:'mum',img:'Pairs-well-with-mother-guilt-sauvblanc.jpg?v=1739069771'},
+  {id:'m8',name:"I Got It From My Mama",price:25,occasion:'mum',img:'I-got-it-from-my-mama-sauvblanc.jpg?v=1739069773'},
+
+  {id:'d1',name:"Cheers To The Best Dad Ever!",price:25,occasion:'dad',img:'Cheers-to-the-best-dad-ever-sauvblanc.jpg?v=1739069799',tag:'Popular'},
+  {id:'d2',name:"Here's Your 750mL Of Dad Joke Juice",price:25,occasion:'dad',img:'Heres-750ml-dad-joke-juice-suavblanc.jpg?v=1739069798'},
+  {id:'d3',name:"Best Fckn' Dad In The World",price:25,occasion:'dad',img:'best_fckn.jpg?v=1739069689'},
+  {id:'d4',name:"Thank Fuck You Didn't Pull Out",price:25,occasion:'dad',img:'pull_out.jpg?v=1739069688'},
+  {id:'d5',name:"Pairs Well With Dad Bods",price:25,occasion:'dad',img:'Pairs-well-with-dad-bods-sauvblanc.jpg?v=1739069797'},
+  {id:'d6',name:"Thanks For Letting Me Live In Your Balls",price:25,occasion:'dad',img:'balls.jpg?v=1739069690'},
+  {id:'d7',name:"Cheers To The One Who Stepped Up",price:25,occasion:'dad',img:'stepped_up.jpg?v=1739069688'},
+
+  {id:'x1',name:"Jingle Fucking Bells",price:25,occasion:'christmas',img:'Jingle-fucking-bells-sauvblanc.jpg?v=1739069778',tag:'Seasonal'},
+  {id:'x2',name:"Festive As Fuck",price:25,occasion:'christmas',img:'festive_as_fuck.jpg?v=1739069668'},
+  {id:'x3',name:"Santa Doesn't Believe In You Either",price:25,occasion:'christmas',img:'Santa-doesnt-believe-you-either-sauvblanc.jpg?v=1739069777'},
+  {id:'x4',name:"Happy Birthday, Jesus",price:25,occasion:'christmas',img:'Happy-birthday-jesus-sauvblanc.jpg?v=1739069780'},
+  {id:'x5',name:"Because Secret Santa",price:25,occasion:'christmas',img:'Because_Secret_Santa.jpg?v=1763412520'},
+  {id:'x6',name:"At Least It's Not A Fckin' Candle",price:25,occasion:'christmas',img:'fck_candle.jpg?v=1739069668'},
+  {id:'x7',name:"Here's Your 750mL Of Xmas Spirit",price:25,occasion:'christmas',img:'Heres-your-750ml-christmas-spirit-sauvblanc.jpg?v=1739069779'},
+  {id:'x8',name:"Santa Knows You've Been A Dick",price:25,occasion:'christmas',img:'santaknows.jpg?v=1739069729'},
+
+  {id:'ty1',name:"Thank Fuck For Besties",price:25,occasion:'thankyou',img:'besties.jpg?v=1739069691',tag:'Popular'},
+  {id:'ty2',name:"Thank Fuck For Nurses",price:25,occasion:'thankyou',img:'nurses.jpg?v=1739069694'},
+  {id:'ty3',name:"Thank Fuck For Grand Parents",price:25,occasion:'thankyou',img:'grandparents.jpg?v=1739069697'},
+  {id:'ty4',name:"Holy Shit, You're Amazing!",price:25,occasion:'thankyou',img:'holy_shit_you_re_amazing.jpg'},
+  {id:'ty5',name:"It's The Thought That Counts",price:25,occasion:'thankyou',img:'thought_that_counts.jpg?v=1739306231'},
+  {id:'ty6',name:"Thank Fuck For Baby Sitters",price:25,occasion:'thankyou',img:'baby_sitters.jpg?v=1739069695'},
+
+  {id:'w1',name:"Holy Shit, You're Getting Married!",price:25,occasion:'wedding',img:'holy_shit_married.jpg?v=1748567957',tag:'New'},
+  {id:'w2',name:"Happily Ever After",price:25,occasion:'wedding',img:'happily_evcer_after_21ff193a-b85d-4f05-ac89-043c69f8ef39.jpg?v=1759834071'},
+  {id:'w3',name:"Drunk In Love",price:25,occasion:'wedding',img:'drunk_in_love.jpg?v=1759833562'},
+  {id:'w4',name:"Here's to New Beginnings",price:25,occasion:'wedding',img:'heres_to_new_beginnings_44144ec4-0a7a-4693-9d2c-3ce14c265f38.jpg?v=1759833616'},
+  {id:'w5',name:"Truly. Madly. Deeply.",price:25,occasion:'wedding',img:'truly_madly_deeply.jpg?v=1759833933'},
+  {id:'w6',name:"About Fckn' Time",price:25,occasion:'wedding',img:'about_fckn_time.jpg?v=1759833270'},
+
+  {id:'ad1',name:"Fuck You",price:25,occasion:'afterdark',img:'Fuck-you-sauvblanc.jpg?v=1739069788'},
+  {id:'ad2',name:"Fuck Off",price:25,occasion:'afterdark',img:'Fuck-off-sauvblanc.jpg?v=1739069786'},
+  {id:'ad3',name:"Fuck Yeah",price:25,occasion:'afterdark',img:'Fuck-yeah-sauvblanc.jpg?v=1739069787'},
+  {id:'ad4',name:"Here's A Bottle Of Calm The Fuck Down",price:25,occasion:'afterdark',img:'calm_the_fuck_down.jpg?v=1739069708'},
+  {id:'ad5',name:"Shit's Fucked",price:25,occasion:'afterdark',img:'shits_fucked.jpg?v=1739069674'},
+  {id:'ad6',name:"One Of Those Fucking Days",price:25,occasion:'afterdark',img:'on_of_those_fucking_days.jpg?v=1748216179'},
+  {id:'ad7',name:"Fuck This Shit",price:25,occasion:'afterdark',img:'Fuck-this-shit-sauvblanc.jpg?v=1739069787'},
+
+  {id:'f1',name:"Leave A Little Sparkle Wherever You Go",price:25,occasion:'fundraising',img:'Shitbox_rally.jpg?v=1763646513'},
+  {id:'f2',name:"Have A Merry Shitmas",price:25,occasion:'fundraising',img:'Merry_Shitmas.jpg?v=1763676140'},
+
+  {id:'jb1',name:"Better Than Nothing",price:25,occasion:'justbecause',img:'betterthannothing.jpg?v=1739069728'},
+  {id:'jb2',name:"Cheaper Than Therapy",price:25,occasion:'justbecause',img:'therapy.jpg?v=1739069740'},
+  {id:'jb3',name:"Happy Fucking Whatever",price:25,occasion:'justbecause',img:'happy_whatever.jpg?v=1739069672'},
+  {id:'jb4',name:"I've Put Fuck All Thought Into This",price:25,occasion:'justbecause',img:'fckall_8b02935c-24bc-4b11-b3b5-5647b08bef90.jpg?v=1739069738'},
+  {id:'jb5',name:"Sorry I'm Late. I Didn't Want To Come.",price:25,occasion:'justbecause',img:'sorryimlate.jpg?v=1739069739'},
+  {id:'jb6',name:"Live. Laugh. Leave By 9PM.",price:25,occasion:'justbecause',img:'9pm.jpg?v=1739306021'},
+];
+
+/* ── CART ── */
+function getCart(){ return JSON.parse(localStorage.getItem('ww-cart')||'[]') }
+function saveCart(c){ localStorage.setItem('ww-cart',JSON.stringify(c)) }
+function addToCart(id, variant, qty){
+  const cart = getCart();
+  const key = id+'|'+variant;
+  const existing = cart.find(i=>i.key===key);
+  if(existing){ existing.qty+=qty; } else {
+    const p = PRODUCTS.find(p=>p.id===id);
+    cart.push({key,id,name:p.name,price:p.price,img:p.img,variant,qty});
+  }
+  saveCart(cart);
+  updateCartCount();
+  showToast('Added to cart 🍷');
+}
+function removeFromCart(key){
+  const cart = getCart().filter(i=>i.key!==key);
+  saveCart(cart);
+  renderCartItems();
+  updateCartCount();
+}
+function updateCartCount(){
+  const total = getCart().reduce((s,i)=>s+i.qty,0);
+  const el = document.getElementById('cartCount');
+  el.textContent = total;
+  el.classList.toggle('show', total>0);
+}
+function renderCartItems(){
+  const cart = getCart();
+  const el = document.getElementById('cartItems');
+  const foot = document.getElementById('cartFoot');
+  if(!cart.length){
+    el.innerHTML='<div class="cart-empty"><p>Your cart is empty.</p><button class="btn-primary" style="width:auto;padding:10px 24px" onclick="closeCart();showPage(\'shop\')">Start Shopping</button></div>';
+    foot.style.display='none';
+    return;
+  }
+  el.innerHTML = cart.map(item=>`
+    <div class="cart-item">
+      <div class="cart-item__img"><img src="${CDN+item.img}" alt="${item.name}" onerror="this.style.display='none'"></div>
+      <div>
+        <div class="cart-item__name">${item.name}</div>
+        <div class="cart-item__meta">${item.variant} · Qty ${item.qty}</div>
+      </div>
+      <div style="display:flex;flex-direction:column;align-items:flex-end;gap:6px">
+        <span class="cart-item__price">$${item.price*item.qty}</span>
+        <button class="cart-item__remove" onclick="removeFromCart('${item.key}')">✕</button>
+      </div>
+    </div>`).join('');
+  const subtotal = cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const bottles = cart.reduce((s,i)=>s+i.qty,0);
+  const disc = bottles>=6;
+  document.getElementById('cartDiscount').textContent = disc ? `🎉 20% discount applied — save $${(subtotal*0.2).toFixed(2)}` : bottles>0 ? `Add ${6-bottles} more bottle${6-bottles!==1?'s':''} for 20% off` : '';
+  document.getElementById('cartTotal').textContent = disc ? `$${(subtotal*0.8).toFixed(2)}` : `$${subtotal.toFixed(2)}`;
+  foot.style.display='block';
+}
+function openCart(){ document.getElementById('cartPanel').classList.add('open'); document.getElementById('cartOverlay').classList.add('open'); renderCartItems(); }
+function closeCart(){ document.getElementById('cartPanel').classList.remove('open'); document.getElementById('cartOverlay').classList.remove('open'); }
+
+/* ── TOAST ── */
+let toastTimer;
+function showToast(msg){
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.classList.add('show');
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(()=>t.classList.remove('show'), 2800);
+}
+
+/* ── MODAL ── */
+let currentProduct = null, selectedVariant = 'Sauvignon Blanc', modalQty = 1;
+function openModal(id){
+  currentProduct = PRODUCTS.find(p=>p.id===id);
+  if(!currentProduct) return;
+  selectedVariant = 'Sauvignon Blanc';
+  modalQty = 1;
+  document.getElementById('modalImg').src = CDN+currentProduct.img;
+  document.getElementById('modalImg').alt = currentProduct.name;
+  document.getElementById('modalOcc').textContent = OCCASIONS[currentProduct.occasion]?.emoji+' '+OCCASIONS[currentProduct.occasion]?.label;
+  document.getElementById('modalName').textContent = currentProduct.name;
+  document.getElementById('modalQty').textContent = modalQty;
+  renderVariants();
+  document.getElementById('modalOverlay').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeModal(){ document.getElementById('modalOverlay').classList.remove('open'); document.body.style.overflow=''; }
+function handleOverlayClick(e){ if(e.target===e.currentTarget) closeModal(); }
+function renderVariants(){
+  document.getElementById('variantGrid').innerHTML = VARIANTS.map(v=>`
+    <button class="variant-btn${v===selectedVariant?' selected':''}" onclick="selectVariant('${v}')">${v}</button>`).join('');
+}
+function selectVariant(v){ selectedVariant=v; renderVariants(); }
+function changeQty(d){ modalQty=Math.max(1,Math.min(12,modalQty+d)); document.getElementById('modalQty').textContent=modalQty; }
+function addFromModal(){ if(!currentProduct) return; addToCart(currentProduct.id, selectedVariant, modalQty); closeModal(); }
+
+/* ── ROUTER ── */
+function showPage(name){
+  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
+  document.getElementById('page-'+name).classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ── SHOP FILTER ── */
+let activeFilter = 'all';
+function filterShop(occ){
+  activeFilter = occ;
+  showPage('shop');
+  document.querySelectorAll('.filter-btn').forEach(b=>b.classList.toggle('active',b.dataset.filter===occ));
+  applyFilter();
+}
+function applyFilter(){
+  const cards = document.querySelectorAll('#shopGrid .prod-card');
+  let count=0;
+  cards.forEach(c=>{
+    const show = activeFilter==='all'||c.dataset.occasion===activeFilter;
+    c.classList.toggle('hidden',!show);
+    if(show) count++;
+  });
+  const occ = OCCASIONS[activeFilter];
+  document.getElementById('shopCount').textContent = occ ? `${occ.emoji} ${occ.label} — ${count} bottles` : `${count} bottles`;
+}
+
+/* ── RENDER ── */
+function makeCard(p, large=false){
+  const occ = OCCASIONS[p.occasion];
+  return `<div class="prod-card" data-occasion="${p.occasion}" onclick="openModal('${p.id}')">
+    <div class="prod-card__img">
+      <img src="${CDN+p.img}" alt="${p.name}" loading="lazy" onerror="this.parentElement.style.background='var(--cream3)'">
+      ${p.tag?`<span class="prod-card__tag">${p.tag}</span>`:''}
+    </div>
+    <div class="prod-card__body">
+      <div class="prod-card__name">${p.name}</div>
+      <div class="prod-card__occ">${occ?.emoji||''} ${occ?.label||''}</div>
+      <div class="prod-card__foot">
+        <span class="prod-card__price">$${p.price}</span>
+        <button class="prod-card__atc" onclick="event.stopPropagation();addToCart('${p.id}','Sauvignon Blanc',1)">Add</button>
+      </div>
+    </div>
+  </div>`;
+}
+
+function initHome(){
+  // hero visual — 2 stacked product shots
+  const heroProds = [PRODUCTS[0], PRODUCTS[8], PRODUCTS[24]];
+  document.getElementById('heroVisual').innerHTML = heroProds.map(p=>`
+    <div class="hero__img"><img src="${CDN+p.img}" alt="${p.name}"></div>`).join('');
+
+  // occasion tiles
+  document.getElementById('occGrid').innerHTML = Object.entries(OCCASIONS).map(([key,occ])=>`
+    <div class="occ-tile" onclick="filterShop('${key}')">
+      <div class="occ-tile__emoji">${occ.emoji}</div>
+      <div class="occ-tile__name">${occ.label}</div>
+      <div class="occ-tile__desc">${occ.desc}</div>
+    </div>`).join('');
+
+  // featured: one from each key occasion
+  const featured = ['b1','m1','x1','ty1'].map(id=>PRODUCTS.find(p=>p.id===id));
+  document.getElementById('featuredGrid').innerHTML = featured.map(p=>makeCard(p)).join('');
+}
+
+function initShop(){
+  // filter bar
+  const filters = [['all','All Wines','🍷'], ...Object.entries(OCCASIONS).map(([k,v])=>[k,v.label,v.emoji])];
+  document.getElementById('filterBar').innerHTML = filters.map(([k,l,e])=>`
+    <button class="filter-btn${k==='all'?' active':''}" data-filter="${k}" onclick="filterShop('${k}')">${e} ${l}</button>`).join('');
+
+  // shop grid
+  document.getElementById('shopGrid').innerHTML = PRODUCTS.map(p=>makeCard(p)).join('');
+  applyFilter();
+}
+
+document.addEventListener('DOMContentLoaded',()=>{
+  initHome();
+  initShop();
+  updateCartCount();
+  // keyboard close
+  document.addEventListener('keydown',e=>{ if(e.key==='Escape'){ closeModal(); closeCart(); } });
+});
+</script>
+</body>
+</html>
